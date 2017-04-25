@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:http="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="achilles.eatathome.Wallet"
+    android:background="@color/mainbackground">
+    <LinearLayout
+        android:id="@+id/rlTitle"
+        android:background="#fff"
+        android:elevation="2dp"
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+        <TextView
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:textColor="#333"
+            android:id="@+id/tvBack"
+            android:textSize="14sp"
+            android:text="BACK"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+
+
+        <TextView
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_weight="3"
+            android:textColor="#111"
+            android:id="@+id/tvWallet"
+            android:textSize="22sp"
+            android:text="Wallet"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+        <TextView
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:textColor="#333"
+            android:id="@+id/tvTBBal"
+            android:textSize="17sp"
+            android:text="\u20B9 00"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+
+
+
+    <ScrollView
+        android:scrollbars="none"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingTop="2dp"
+        android:paddingBottom="2dp"
+        android:background="@color/mainbackground"
+        android:layout_below="@id/rlTitle"
+        android:layout_above="@id/tvLine"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <RelativeLayout
+                android:layout_marginTop="10dp"
+                android:id="@+id/llBal"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/fullroundcorner">
+                <TextView
+                    android:textColor="#444"
+                    android:id="@+id/tvBal"
+                    android:textSize="18sp"
+                    android:layout_centerHorizontal="true"
+                    android:text="BALANCE    \u20B9 00"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="7dp"/>
+                <TextView
+                    android:background="#666"
+                    android:layout_below="@id/tvBal"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.2dp" />
+
+                <LinearLayout
+                    android:layout_below="@id/tvBal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/tvAdd"
+                        android:padding="5dp"
+                        android:textColor="#33aa33"
+                        android:gravity="end|center_vertical"
+                        android:textSize="14sp"
+                        android:text="Add Money to Wallet"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent" />
+                    <TextView
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="10dp"
+                        android:background="#666"
+                        android:textSize="30sp"
+                        android:gravity="center"
+                        android:layout_weight="0"
+                        android:layout_width="0.1dp"
+                        android:layout_height="match_parent" />
+                    <TextView
+
+                        android:id="@+id/tvWithdraw"
+                        android:padding="5dp"
+                        android:textColor="#f74848"
+                        android:gravity="start|center_vertical"
+                        android:textSize="14sp"
+                        android:text="Withdraw to Bank"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent" />
+                </LinearLayout>
+            </RelativeLayout>
+            <TextView
+                android:textSize="11sp"
+                android:id="@+id/tvTransHist"
+                android:paddingLeft="10dp"
+                android:textColor="#999"
+                android:text="Transaction History"
+                android:layout_marginTop="30dp"
+                android:layout_below="@id/llBal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_below="@id/tvTransHist"
+                android:id="@+id/my_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="vertical" />
+        </RelativeLayout>
+
+    </ScrollView>
+
+</RelativeLayout>
+

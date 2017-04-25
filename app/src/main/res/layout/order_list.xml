@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--  Single List Item Design -->
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:http="http://schemas.android.com/apk/res-auto"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:background="@drawable/fullroundcorner"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp"
+    android:paddingTop="15dp"
+    android:layout_margin="6dp"
+    android:elevation="2dp">
+    <TextView
+        android:paddingBottom="8dp"
+        android:textColor="#333"
+        android:textSize="14sp"
+        android:text="Maa ka Paratha"
+        android:id="@+id/label1"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content">
+    </TextView>
+    <TextView
+        android:paddingRight="15dp"
+        android:paddingBottom="8dp"
+        android:textColor="#333"
+        android:id="@+id/label2"
+        android:textSize="14sp"
+        android:text="\u20B9 00"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"/>
+    <TextView
+        android:id="@+id/tvLine"
+        android:background="#999"
+        android:layout_width="fill_parent"
+        android:layout_height="0.1dp"
+        android:layout_below="@id/label1"/>
+    <TextView
+        android:textSize="12dp"
+        android:textColor="#333"
+        android:paddingLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:text="Aloo Paratha 2pc achaar..."
+        android:layout_below="@id/tvLine"
+        android:id="@+id/label3"
+        android:layout_width="match_parent"
+        android:layout_height="16dp" />
+
+    <TextView
+        android:textSize="11dp"
+        android:paddingLeft="10dp"
+        android:layout_marginTop="4dp"
+        android:text="Lunch, 12-02-1993"
+        android:layout_below="@id/label3"
+        android:id="@+id/label5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:textSize="12dp"
+        android:layout_alignParentRight="true"
+        android:paddingRight="10dp"
+        android:layout_marginTop="4dp"
+        android:text="SCHEDULED"
+        android:layout_below="@id/label3"
+        android:id="@+id/label6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <RelativeLayout
+        android:layout_below="@id/label5"
+        android:id="@+id/rlExtra"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_marginTop="10dp"
+            android:id="@+id/tvLine2"
+            android:background="#999"
+            android:layout_width="fill_parent"
+            android:layout_height="0.1dp"/>
+        <LinearLayout
+            android:paddingLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:id="@+id/llD1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvLine2">
+            <TextView
+                android:textSize="13sp"
+                android:layout_weight="2"
+                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:text="Quantity" />
+            <TextView
+                android:id="@+id/tvQ"
+                android:textSize="13sp"
+                android:paddingRight="10dp"
+                android:gravity="end|center_vertical"
+                android:text="0"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="10px"
+            android:paddingLeft="5dp"
+            android:id="@+id/llD2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/llD1">
+            <TextView
+                android:textSize="13sp"
+                android:layout_weight="2"
+                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:text="Item Total" />
+            <TextView
+                android:id="@+id/tvIT"
+                android:textSize="13sp"
+                android:paddingRight="10dp"
+                android:gravity="end|center_vertical"
+                android:text="00"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="10px"
+            android:paddingLeft="5dp"
+            android:id="@+id/llD3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/llD2">
+            <TextView
+                android:textSize="13sp"
+                android:layout_weight="2"
+                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:text="Delivery Charges" />
+            <TextView
+                android:id="@+id/tvDC"
+                android:textSize="13sp"
+                android:paddingRight="10dp"
+                android:gravity="end|center_vertical"
+                android:text="00"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="10px"
+            android:paddingLeft="5dp"
+            android:id="@+id/llD4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/llD3">
+            <TextView
+                android:textSize="13sp"
+                android:layout_weight="2"
+                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:text="Discount" />
+            <TextView
+                android:id="@+id/tvDT"
+                android:textSize="13sp"
+                android:paddingRight="10dp"
+                android:gravity="end|center_vertical"
+                android:text="00"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="10px"
+            android:paddingLeft="5dp"
+            android:id="@+id/llD5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/llD4">
+            <TextView
+                android:textColor="#555"
+                android:textSize="14dp"
+                android:layout_weight="2"
+                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:text="Grand Total" />
+            <TextView
+                android:id="@+id/tvGT"
+                android:paddingRight="10dp"
+                android:gravity="end|center_vertical"
+                android:text="00"
+                android:textColor="#555"
+                android:textSize="14sp"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <TextView
+            android:layout_marginTop="5dp"
+            android:id="@+id/tvLine4"
+            android:background="#999"
+            android:layout_width="fill_parent"
+            android:layout_height="0.1dp"
+            android:layout_below="@id/llD5"/>
+        <LinearLayout
+            android:paddingTop="5dp"
+            android:paddingLeft="5dp"
+            android:id="@+id/llD6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvLine4">
+            <TextView
+                android:gravity="center_vertical"
+                android:id="@+id/tvOrderNo"
+                android:textColor="#555"
+                android:textSize="14dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:text="Order # " />
+            <TextView
+                android:id="@+id/tvTransNo"
+                android:paddingRight="10dp"
+                android:gravity="end|center_vertical"
+                android:text="Transaction # "
+                android:textColor="#555"
+                android:textSize="14sp"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </RelativeLayout>
+    <TextView
+        android:layout_marginTop="5dp"
+        android:id="@+id/tvLine3"
+        android:background="#999"
+        android:layout_width="fill_parent"
+        android:layout_height="0.1dp"
+        android:layout_below="@id/rlExtra"/>
+    <LinearLayout
+        android:layout_below="@id/tvLine3"
+        android:id="@+id/llD7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_gravity="center_vertical"
+            android:padding="10dp"
+            android:layout_weight="2"
+            android:id="@+id/tvOD"
+            android:text="SHOW DETAILS"
+            android:textSize="14sp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:gravity="end|center_vertical"
+            android:padding="10dp"
+            android:layout_weight="2"
+            android:id="@+id/tvComplaints"
+            android:textColor="#f96666"
+            android:text="ORDER HELP?"
+            android:textSize="14sp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+</RelativeLayout>

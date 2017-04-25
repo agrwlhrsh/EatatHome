@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:http="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/mainbackground"
+    tools:context="achilles.eatathome.UploadMenu">
+    <LinearLayout
+        android:id="@+id/rlTitle"
+        android:background="#fff"
+        android:elevation="2dp"
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+
+        <TextView
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:textColor="#333"
+            android:id="@+id/tvBack"
+            android:textSize="13sp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+        <TextView
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_weight="3"
+            android:layout_centerHorizontal="true"
+            android:textColor="#111"
+            android:id="@+id/tvEP"
+            android:textSize="22sp"
+            android:text="Upload Menu"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/tvLine"
+        android:text=" "
+        android:background="#555"
+        android:layout_above="@id/llSelect"
+        android:layout_width="match_parent"
+        android:layout_height="0.2dp" />
+    <LinearLayout
+        android:id="@+id/llSelect"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:layout_alignParentBottom="true"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:background="#fff"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:id="@+id/ic1"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_centerHorizontal="true"
+                android:id="@+id/ivProfile4"
+                android:padding="2dp"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:src="@drawable/menu"/>
+            <TextView
+                android:padding="2dp"
+                android:textColor="@color/background"
+                android:textSize="10sp"
+                android:layout_centerHorizontal="true"
+                android:text="MENU"
+                android:layout_below="@id/ivProfile4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/ic2"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_centerHorizontal="true"
+                android:id="@+id/ivProfile3"
+                android:padding = "2dp"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:src="@drawable/cart1"/>
+
+            <TextView
+                android:padding="2dp"
+                android:textColor="#222"
+                android:textSize="8sp"
+                android:layout_centerHorizontal="true"
+                android:text="CART"
+                android:layout_below="@id/ivProfile3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/ic4"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_centerHorizontal="true"
+                android:id="@+id/ivProfile"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:src="@drawable/profile3"/>
+            <TextView
+                android:padding="2dp"
+                android:textColor="#222"
+                android:textSize="8sp"
+                android:layout_centerHorizontal="true"
+                android:text="PROFILE"
+                android:layout_below="@id/ivProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+    </LinearLayout>
+    <ScrollView
+
+        android:paddingTop="5dp"
+        android:scrollbars="none"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:background="@color/mainbackground"
+        android:layout_below="@id/rlTitle"
+        android:layout_above="@id/tvLine"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.RecyclerView
+            android:paddingBottom="10dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="20dp"
+            android:id="@+id/my_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="vertical" />
+    </ScrollView>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/rlTitle"
+        android:layout_above="@id/llSelect">
+        <android.support.design.widget.FloatingActionButton
+            android:src="@android:drawable/ic_input_add"
+            android:tint="#fff"
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"/>
+    </RelativeLayout>
+
+
+</RelativeLayout>

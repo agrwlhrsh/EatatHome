@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--  Single List Item Design -->
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:http="http://schemas.android.com/apk/res-auto"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:background="@drawable/fullroundcorner"
+    android:paddingTop="8dp"
+    android:layout_margin="6dp"
+    android:elevation="2dp">
+
+    <TextView
+        android:textColor="#444"
+        android:paddingLeft="10dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="10dp"
+        android:text="Veg Thaali"
+        android:textSize="16sp"
+        android:id="@+id/tvMName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/tvLine1"
+        android:background="#999"
+        android:layout_width="fill_parent"
+        android:layout_height="0.1dp"
+        android:layout_below="@id/tvMName"/>
+
+    <TextView
+        android:textColor="#666"
+        android:padding="10dp"
+        android:text="Item Details.................................."
+        android:textSize="14sp"
+        android:layout_below="@id/tvLine1"
+        android:id="@+id/tvIName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_below="@id/tvIName"
+        android:id="@+id/tvLine2"
+        android:background="#999"
+        android:layout_width="fill_parent"
+        android:layout_height="0.1dp"/>
+
+    <LinearLayout
+        android:padding="5dp"
+        android:id="@+id/ll1"
+        android:layout_below="@id/tvLine2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:gravity="center"
+            android:layout_weight="3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:text="LUNCH"
+                android:textSize="14sp"
+                android:id="@+id/tvTime"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:text="TODAY"
+                android:textSize="14sp"
+                android:id="@+id/tvDate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:textSize="17sp"
+                android:text="\u20B9 00"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:id="@+id/tvCost"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+    <TextView
+        android:layout_below="@id/ll1"
+        android:id="@+id/tvLine3"
+        android:background="#999"
+        android:layout_width="fill_parent"
+        android:layout_height="0.1dp"/>
+    <LinearLayout
+        android:layout_below="@id/tvLine3"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:padding="10dp"
+            android:textSize="15sp"
+            android:textColor="@color/background"
+            android:text="DELETE"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+        <TextView
+            android:padding="10dp"
+            android:gravity="center|end"
+            android:textSize="15sp"
+            android:text="UPLOAD"
+            android:textColor="#33dd44"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+    </LinearLayout>
+</RelativeLayout>

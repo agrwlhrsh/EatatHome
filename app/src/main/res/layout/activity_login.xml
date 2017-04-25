@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:http="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/background"
+    tools:context="achilles.eatathome.Login">
+    <ScrollView
+        android:id="@+id/sv1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_marginTop="20dp"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:id="@+id/lliv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_gravity="center"
+                    android:id="@+id/ivChef"
+                    android:src="@drawable/chef3"
+                    android:padding="10dp"
+                    android:layout_weight="1"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    />
+            </LinearLayout>
+
+            <EditText
+                android:layout_below="@id/lliv"
+                android:textSize="20sp"
+                android:id="@+id/etEmail"
+                android:layout_marginTop="20dp"
+                android:paddingLeft="20dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                android:hint="Email Id"
+                android:gravity="left"
+                android:backgroundTint="@color/textC"
+                android:textColorHint="@color/hintC"
+                android:textColor="@color/textC" />
+
+            <EditText
+                android:drawablePadding="20sp"
+                android:paddingRight="10dp"
+                android:textColorHint="@color/hintC"
+                android:textColor="@color/textC"
+                android:backgroundTint="@color/textC"
+                android:textSize="20sp"
+                android:fontFamily="sans-serif"
+                android:layout_below="@+id/etEmail"
+                android:paddingLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:id="@+id/etPass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Password"
+                android:gravity="left"
+                android:inputType="textPassword" />
+
+            <TextView
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="45dp"
+                android:textColor="@color/textC"
+                android:textSize="17sp"
+                android:id="@+id/tvForPass"
+                android:layout_below="@+id/etPass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Forgot Password?" />
+
+            <TextView
+                android:id="@+id/tvSignin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sign In"
+                android:textColor="@color/textC"
+                android:layout_marginTop="20dp"
+                android:layout_centerInParent="true"
+                android:layout_below="@+id/tvForPass"
+                android:fontFamily="cursive"
+                android:textSize="40sp"/>
+
+            <TextView
+                android:fontFamily="casual"
+                android:textSize="18sp"
+                android:layout_marginTop="20dp"
+                android:layout_centerInParent="true"
+                android:textColor="@color/textC"
+                android:layout_below="@+id/tvSignin"
+                android:id="@+id/tvSignUp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="New User? Register Here!!"/>
+            <TextView
+                android:layout_marginTop="15dp"
+                android:layout_below="@id/tvSignUp"
+                android:textColor="@color/textC"
+                android:id="@+id/tvConnect"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Or Connect with"
+                android:textSize="16sp"
+                android:layout_centerHorizontal="true"/>
+
+            <LinearLayout
+                android:layout_below="@id/tvConnect"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/llGFB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="20dp">
+
+                <ImageView
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/gp3"
+                    android:id="@+id/ivGoogle"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    />
+
+                <ImageView
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/fb3"
+                    android:id="@+id/ivFb"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"/>
+            </LinearLayout>
+        </RelativeLayout>
+    </ScrollView>
+
+
+</RelativeLayout>

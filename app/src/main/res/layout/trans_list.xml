@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--  Single List Item Design -->
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:http="http://schemas.android.com/apk/res-auto"
+    android:layout_height="wrap_content"
+    android:layout_width="fill_parent"
+    android:background="@drawable/fullroundcorner"
+    android:padding="10dp"
+    android:elevation="2dp"
+    android:layout_margin="5dp">
+    <TextView
+        android:textColor="#333"
+        android:textSize="14sp"
+        android:text="Paid for Order"
+        android:id="@+id/label"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content">
+    </TextView>
+    <TextView
+        android:textColor="#333"
+        android:id="@+id/label2"
+        android:textSize="14sp"
+        android:text="- \u20B9 00"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"/>
+    <TextView
+        android:textSize="12dp"
+        android:layout_marginTop="2dp"
+        android:text="Transaction #12345678"
+        android:layout_below="@id/label"
+        android:id="@+id/label3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:textSize="12dp"
+        android:textColor="#33bb44"
+        android:layout_marginTop="2dp"
+        android:layout_below="@id/label2"
+        android:id="@+id/label4"
+        android:text="SUCCESSFUL"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"/>
+    <TextView
+        android:textSize="12dp"
+        android:layout_marginTop="2dp"
+        android:text="Order #12345678"
+        android:layout_below="@id/label3"
+        android:id="@+id/label5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:textSize="12dp"
+        android:layout_marginTop="2dp"
+        android:layout_below="@id/label4"
+        android:id="@+id/label6"
+        android:text="12/02/1993"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"/>
+</RelativeLayout>

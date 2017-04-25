@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@drawable/dialogbackground"
+    android:padding="20dp"
+    android:elevation="3dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Date"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/etDate"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="2"
+                    android:background="@drawable/textcorner"
+                    android:gravity="center"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:text="12-02-1993"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_marginRight="5dp"
+                    android:gravity="end"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="5dp"
+                    android:text="Time"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/tvLunch"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="2dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/textcorner"
+                    android:gravity="center"
+                    android:padding="3dp"
+                    android:text="LUNCH"
+                    android:textSize="10sp" />
+
+                <TextView
+                    android:id="@+id/tvDinner"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="2dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/textcorner"
+                    android:gravity="center"
+                    android:padding="3dp"
+                    android:text="DINNER"
+                    android:textSize="10sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/etMenu"
+            android:layout_marginTop="10dp"
+            android:padding="10dp"
+            android:background="@drawable/textcorner"
+            android:textSize="15sp"
+            android:hint="Menu Name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:id="@+id/etItem"
+            android:background="@drawable/textcorner"
+            android:padding="10dp"
+            android:layout_marginTop="10dp"
+            android:textSize="14sp"
+            android:hint="Item Description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_marginRight="3dp"
+                    android:textSize="13sp"
+                    android:text="Quantity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <EditText
+                    android:inputType="number"
+                    android:textSize="13sp"
+                    android:id="@+id/etQuan"
+                    android:layout_marginLeft="3dp"
+                    android:background="@drawable/textcorner"
+                    android:padding="8dp"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_marginRight="3dp"
+                    android:textSize="13sp"
+                    android:text="Cost"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <EditText
+                    android:textSize="13sp"
+                    android:id="@+id/etCost"
+                    android:inputType="number"
+                    android:layout_marginLeft="3dp"
+                    android:padding="8dp"
+                    android:background="@drawable/textcorner"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tvV"
+                android:background="@drawable/textcorner"
+                android:padding="8dp"
+                android:textSize="13sp"
+                android:gravity="center"
+                android:layout_marginRight="10dp"
+                android:text="VEG"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/tvNV"
+                android:background="@drawable/textcorner"
+                android:padding="8dp"
+                android:textSize="13sp"
+                android:gravity="center"
+                android:layout_marginLeft="10dp"
+                android:text="NONVEG"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</ScrollView>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:http="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/background"
+    tools:context="achilles.eatathome.ChoiceRegi">
+
+    <ImageView
+        android:layout_marginTop="30dp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/hungry1"
+        android:id="@+id/ivHungry"
+        android:layout_width="150dp"
+        android:layout_height="150dp" />
+
+    <CheckBox
+        android:paddingLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/ivHungry"
+        android:textColor="@color/textC"
+        android:buttonTint="@color/textC"
+        android:text="@string/hungry"
+        android:fontFamily="casual"
+        android:textSize="24sp"
+        android:id="@+id/cbHungry"
+        android:layout_marginRight="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <ImageView
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/cook2"
+        android:layout_marginTop="30dp"
+        android:layout_below="@id/cbHungry"
+        android:id="@+id/ivServe"
+        android:layout_width="200dp"
+        android:layout_height="150dp" />
+    <CheckBox
+        android:textColor="@color/textC"
+        android:paddingLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/ivServe"
+        android:buttonTint="@color/textC"
+        android:text="@string/serve"
+        android:fontFamily="casual"
+        android:textSize="24sp"
+        android:id="@+id/cbServe"
+        android:layout_marginRight="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:textColor="@color/textC"
+        android:fontFamily="cursive"
+        android:textSize="40sp"
+        android:gravity="center"
+        android:layout_marginBottom="30dp"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/tvContinue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Continue"/>
+</RelativeLayout>
