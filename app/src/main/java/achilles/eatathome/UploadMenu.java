@@ -13,6 +13,7 @@ import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -31,6 +32,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -60,10 +62,12 @@ public class UploadMenu extends AppCompatActivity {
     String address = "";
     String aid = "0";
 
+    private static final String SMENU_URL = "http://eatathome.pe.hu/SMenu_list.php";
+
     private RecyclerView recyclerView;
     private RecyclerView.Adapter cAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    ArrayList<HashMap<String, String>> menuList;
+    ArrayList<HashMap<String, String>> sup_menuList;
 
 
     @Override
@@ -112,11 +116,99 @@ public class UploadMenu extends AppCompatActivity {
                 openDialog();
             }
         });
-        menuList = new ArrayList<>();
+        sup_menuList = new ArrayList<>();
         Log.w(TAG, "onCreate: Compulsory Call" );
         recyclerView =(RecyclerView) findViewById(R.id.my_recycler_view);
 
+        showMenuList();
+
+
     }
+
+    private void showMenuList() {
+
+        final ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Connecting...");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.show();
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, SMENU_URL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            Log.w(TAG, "onResponse: " + response );
+                            JSONObject jsonResponse = new JSONObject(response);
+                            boolean success = jsonResponse.getBoolean("success");
+                            progressDialog.dismiss();
+                            if(success) {
+                                JSONArray order = jsonResponse.getJSONArray("menu");
+                                for (int i = 0; i < order.length(); i++) {
+                                    JSONObject c = order.getJSONObject(i);
+
+                                    // tmp hash map for single hash_list
+                                    HashMap<String, String> hash_list = new HashMap<>();
+
+                                    // adding each child node to HashMap key => value
+                                    hash_list.put("mid", c.getString("mid"));
+                                    hash_list.put("time",c.getString("time"));
+                                    hash_list.put("date", c.getString("date"));
+                                    hash_list.put("quan",c.getString("quan"));
+                                    hash_list.put("items", c.getString("items"));
+                                    hash_list.put("mname",c.getString("mname"));
+                                    hash_list.put("cost",c.getString("cost"));
+                                    hash_list.put("total",c.getString("total"));
+                                    hash_list.put("veg", c.getString("veg"));
+                                    // adding hash_list to hash_list list
+                                    sup_menuList.add(hash_list);
+                                    Log.w(TAG, "onResponse: Horaha hashlist" );
+                                }
+                                Log.w(TAG, "onResponse: " + sup_menuList.toString() );
+                                recyclerView.setHasFixedSize(true);
+                                mLayoutManager = new LinearLayoutManager(UploadMenu.this);
+                                recyclerView.setLayoutManager(mLayoutManager);
+                                cAdapter = new UploadAdapter(sup_menuList);
+                                recyclerView.setAdapter(cAdapter);
+                            }
+                            else{
+                                android.app.AlertDialog.Builder alert = new android.app.AlertDialog.Builder(UploadMenu.this);
+                                alert.setTitle("Error");
+                                alert.setMessage("Some Error Occurred. Try Later!!!");
+                                alert.setPositiveButton("OK",null);
+                                alert.show();
+                            }
+                        }
+                        catch (JSONException e) {
+                            progressDialog.dismiss();
+                            Log.w(TAG, "onResponse: JSONException: \n\n" + e.getMessage().toString() );
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.w(TAG, "onErrorResponse: " + error.getMessage().toString() );
+                        progressDialog.dismiss();
+                        android.app.AlertDialog.Builder alert = new android.app.AlertDialog.Builder(UploadMenu.this);
+                        alert.setTitle("Error");
+                        alert.setMessage(error.getMessage().toString());
+                        alert.setPositiveButton("OK",null);
+                        alert.show();
+                    }
+                }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> map = new HashMap<String,String>();
+                Log.w(TAG, "getParams:");
+                map.put("id", id);
+                map.put("type",type);
+                return map;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+    }
+
 
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -132,20 +224,24 @@ public class UploadMenu extends AppCompatActivity {
         final TextView tvNV = (TextView)subView.findViewById(R.id.tvNV);
         final TextView tvLunch = (TextView)subView.findViewById(R.id.tvLunch);
         final TextView tvDinner = (TextView)subView.findViewById(R.id.tvDinner);
+        final TextView tvUpload = (TextView)subView.findViewById(R.id.tvUpload);
+        final TextView tvCancel = (TextView)subView.findViewById(R.id.tvCancel);
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setView(subView);
         final AlertDialog alertDialog = builder.create();
         builder.show();
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+
+        tvCancel.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
+            public void onClick(View v) {
                 alertDialog.dismiss();
             }
         });
-        builder.setPositiveButton("Upload", new DialogInterface.OnClickListener() {
+
+        tvUpload.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
+            public void onClick(View v) {
                 menu = etMenu.getText().toString().trim();
                 date = etDate.getText().toString().trim();
                 item = etItem.getText().toString().trim();
@@ -157,17 +253,17 @@ public class UploadMenu extends AppCompatActivity {
                     alert.setPositiveButton("OK",null);
                     alert.show();
                 }else{
-                        android.app.AlertDialog.Builder alert = new android.app.AlertDialog.Builder(UploadMenu.this);
-                        alert.setMessage("Are you sure you want to Continue??");
-                        alert.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                alertDialog.dismiss();
-                                uploadMenu();
-                            }
-                        });
-                        alert.setNegativeButton("No", null);
-                        alert.show();
+                    android.app.AlertDialog.Builder alert = new android.app.AlertDialog.Builder(UploadMenu.this);
+                    alert.setMessage("Are you sure you want to Continue??");
+                    alert.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            alertDialog.dismiss();
+                            uploadMenu();
+                        }
+                    });
+                    alert.setNegativeButton("No", null);
+                    alert.show();
                 }
             }
         });

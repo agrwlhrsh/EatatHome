@@ -8,6 +8,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
 public class CookSignup extends AppCompatActivity {
 
     EditText etAcNumber, etAcName, etIFSC, etPincode, etState, etCity, etBuildNo, etArea, etLandmark;
@@ -70,6 +77,7 @@ public class CookSignup extends AppCompatActivity {
                         pincode.length()>0 && state.length()>0 && city.length()>0 &&
                         buildno.length()>0 && area.length()>0 && landmark.length()>0 ){
                     Intent inten = new Intent(CookSignup.this, OTP.class);
+                    callSMS();
                     inten.putExtra("name",name);
                     inten.putExtra("email",email);
                     inten.putExtra("phone",phone);
@@ -81,11 +89,36 @@ public class CookSignup extends AppCompatActivity {
                     inten.putExtra("ifsc",ifsc);
                     String address = buildno + ";" + landmark + ";" + area + ";" + city + ";" + state  + ";" + pincode;
                     inten.putExtra("address",address);
+                    inten.addCategory(Intent.CATEGORY_HOME);
+                    inten.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(inten);
+                    finish();
                 }else{
                     Toast.makeText(CookSignup.this,"Fill all Fields",Toast.LENGTH_LONG).show();
                 }
             }
         });
+    }
+    public void callSMS(){
+        // Instantiate the RequestQueue.
+        RequestQueue queue = Volley.newRequestQueue(this);
+        String url ="http://www.redoxygen.net/sms.dll?Action=SendSMS&AccountId=CI00192044&Email=agarwal.harshnu@gmail.com&Password=XAec1kq0&Recipient="+phone+"&Message=Welcome%20to%20Eat@Home%20Family.%20Your%20OTP%20for%20registration%20is%20"+otp;
+// Request a string response from the provided URL.
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        Toast.makeText(CookSignup.this,"OTP sent Succesfully",Toast.LENGTH_LONG).show();
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                Toast.makeText(CookSignup.this,"Error in sending OTP: " + error.getMessage().toString(),Toast.LENGTH_LONG).show();
+            }
+        });
+// Add the request to the RequestQueue.
+        queue.add(stringRequest);
     }
 }

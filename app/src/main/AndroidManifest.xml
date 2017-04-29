@@ -29,7 +29,8 @@
         <activity android:name=".BrowseMenu" />
         <activity android:name=".Cart" />
         <activity android:name=".Login" />
-        <activity android:name=".Cook"></activity>
+        <activity android:name=".Cook" />
+        <activity android:name=".ForgotPass"></activity>
     </application>
 
 </manifest>

@@ -116,6 +116,11 @@ public class OTP extends Activity {
                                 Intent inten = new Intent(OTP.this, Profile.class);
                                 session.createLoginSession(email, name, phone, address, id, "", "", "",balance,type,aid);
                                 startActivity(inten);
+                                inten.addCategory(Intent.CATEGORY_HOME);
+                                inten.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                startActivity(inten);
+                                Toast.makeText(OTP.this,"REGISTRATION SUCCESSFUL",Toast.LENGTH_LONG ).show();
+                                finish();
                             }
                             else {
                                 Toast.makeText(OTP.this,"REGISTRATION FAILED",Toast.LENGTH_LONG ).show();
@@ -173,7 +178,11 @@ public class OTP extends Activity {
                                 session.createLoginSession(email, name, phone, address, id, "", "", "",balance,type, aid);
                                 Intent inten = new Intent(OTP.this, BrowseMenu.class);
                                 startActivity(inten);
+                                inten.addCategory(Intent.CATEGORY_HOME);
+                                inten.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                startActivity(inten);
                                 Toast.makeText(OTP.this,"REGISTRATION SUCCESSFUL",Toast.LENGTH_LONG ).show();
+                                finish();
                             }
                             else {
                                 Toast.makeText(OTP.this,"REGISTRATION FAILED",Toast.LENGTH_LONG ).show();
@@ -199,6 +208,7 @@ public class OTP extends Activity {
                 map.put("pass", pass);
                 map.put("phone",phone);
                 map.put("name",name);
+                map.put("address",address);
                 return map;
             }
         };

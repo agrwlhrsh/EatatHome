@@ -60,6 +60,7 @@ public class Orders extends AppCompatActivity {
         acname= user.get(SessionManager.KEY_ACNAME);
         ifsc = user.get(SessionManager.KEY_IFSC);
         aid = user.get(SessionManager.KEY_AID);
+
         orderList = new ArrayList<>();
         Log.w(TAG, "onCreate: Compulsory Call" );
         recyclerView =(RecyclerView) findViewById(R.id.my_recycler_view);

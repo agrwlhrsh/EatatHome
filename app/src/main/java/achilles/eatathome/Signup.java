@@ -27,6 +27,7 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 import static android.content.ContentValues.TAG;
 
@@ -42,7 +43,7 @@ public class Signup extends Activity {
     String pass = "";
     String confPass = "";
     String phone = "";
-    String otp = "1234";
+    String otp = "";
     String type = "";
 
     @Override
@@ -60,7 +61,7 @@ public class Signup extends Activity {
         etConfPass = (EditText)findViewById(R.id.etConfPass);
         cbTnC = (CheckBox)findViewById(R.id.cbTnC);
         tvRegister = (TextView)findViewById(R.id.tvRegister);
-
+        otp = generateOTP();
         tvRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -137,6 +138,7 @@ public class Signup extends Activity {
                                     Log.w(TAG, "onResponse: inside exists");
                                     if (type.equals("CUST")) {
                                         Log.w(TAG, "onResponse: CUST");
+                                        callSMS();
                                         Intent inten = new Intent(Signup.this, OTP.class);
                                         inten.putExtra("name", name);
                                         inten.putExtra("email", email);
@@ -144,7 +146,10 @@ public class Signup extends Activity {
                                         inten.putExtra("pass", pass);
                                         inten.putExtra("otp", otp);
                                         inten.putExtra("type", type);
+                                        inten.addCategory(Intent.CATEGORY_HOME);
+                                        inten.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                         startActivity(inten);
+                                        finish();
                                     } else {
                                         Log.w(TAG, "onResponse: SUPP");
                                         Intent inten = new Intent(Signup.this, CookSignup.class);
@@ -200,5 +205,32 @@ public class Signup extends Activity {
         };
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
+    }
+
+
+    public void callSMS(){
+        // Instantiate the RequestQueue.
+        RequestQueue queue = Volley.newRequestQueue(this);
+        String url ="http://www.redoxygen.net/sms.dll?Action=SendSMS&AccountId=CI00192044&Email=agarwal.harshnu@gmail.com&Password=XAec1kq0&Recipient="+phone+"&Message=Welcome%20to%20Eat@Home%20Family.%20Your%20OTP%20for%20registration%20is%20"+otp;
+// Request a string response from the provided URL.
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                Toast.makeText(Signup.this,"Error in sending OTP: " + error.getMessage().toString(),Toast.LENGTH_LONG).show();
+            }
+        });
+// Add the request to the RequestQueue.
+        queue.add(stringRequest);
+    }
+
+    public String generateOTP(){
+        Random rand = new Random();
+        return String.format("%04d", rand.nextInt(10000));
     }
 }

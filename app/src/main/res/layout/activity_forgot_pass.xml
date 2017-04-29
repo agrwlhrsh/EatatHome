@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/background"
-    tools:context="achilles.eatathome.OTP">
+    tools:context="achilles.eatathome.ForgotPass">
     <ImageView
         android:layout_marginTop="20dp"
         android:id="@+id/ivChef"
@@ -14,38 +14,29 @@
         android:layout_height="wrap_content"
         android:src="@drawable/chef1"/>
     <EditText
+        android:paddingBottom="15dp"
+        android:paddingLeft="20dp"
+        android:hint="Registered Email id"
+        android:layout_margin="30dp"
         android:textColor="@color/textC"
         android:textColorHint="@color/hintC"
         android:backgroundTint="@color/textC"
-        android:id="@+id/etOTP"
-        android:inputType="number"
+        android:id="@+id/etEmail"
+        android:inputType="textEmailAddress"
         android:layout_centerInParent="true"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:ems="4"
         android:drawableTint="@color/textC"
-        android:textSize="24sp"
-        android:maxLength="4"/>
+        android:textSize="18sp"/>
     <TextView
         android:textColor="@color/textC"
         android:fontFamily="cursive"
         android:textSize="40sp"
-        android:text="@string/approve"
-        android:layout_marginTop="30dp"
+        android:text="Continue"
+        android:layout_marginTop="5dp"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/etOTP"
-        android:id="@+id/tvApprove"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-    <TextView
-        android:textColor="@color/textC"
-        android:textSize="18sp"
-        android:text="@string/resend"
-        android:layout_marginTop="30dp"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/tvApprove"
-        android:id="@+id/tvResend"
+        android:layout_below="@id/etEmail"
+        android:id="@+id/tvContinue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 

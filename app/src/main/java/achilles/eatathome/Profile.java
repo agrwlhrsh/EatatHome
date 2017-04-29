@@ -21,7 +21,7 @@ public class Profile extends AppCompatActivity {
     String ifsc = "";
     String balance = "";
     String address = "";
-
+    String aid = "";
     TextView tvName, tvPhone, tvEdit, item1, item2, item3, item4, item5, item6, item7, item8;
     RelativeLayout ic1, ic2, ic3, ic4;
 
@@ -45,6 +45,7 @@ public class Profile extends AppCompatActivity {
         acno = user.get(SessionManager.KEY_ACNO);
         acname= user.get(SessionManager.KEY_ACNAME);
         ifsc = user.get(SessionManager.KEY_IFSC);
+        aid = user.get(SessionManager.KEY_AID);
 
         ic1 = (RelativeLayout)findViewById(R.id.ic1);
         ic2 = (RelativeLayout)findViewById(R.id.ic2);

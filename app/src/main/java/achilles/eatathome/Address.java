@@ -1,6 +1,7 @@
 package achilles.eatathome;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -69,13 +70,16 @@ public class Address extends AppCompatActivity {
         etState = (EditText)findViewById(R.id.etState);
 
         Log.w(TAG, "onCreate:" + address );
-        StringTokenizer st = new StringTokenizer(address,";");
-        buildNo = st.nextToken().toString() + "";
-        landmark = st.nextToken().toString() + "";
-        area = st.nextToken().toString() + "";
-        city = st.nextToken().toString() + "";
-        state = st.nextToken().toString() + "";
-        pincode = st.nextToken().toString() + "";
+        if(address.length() > 5){
+            StringTokenizer st = new StringTokenizer(address,";");
+            buildNo = st.nextToken().toString() + "";
+            landmark = st.nextToken().toString() + "";
+            area = st.nextToken().toString() + "";
+            city = st.nextToken().toString() + "";
+            state = st.nextToken().toString() + "";
+            pincode = st.nextToken().toString() + "";
+        }
+
 
         etBuildNo.setText(buildNo);
         etLandmark.setText(landmark);
@@ -141,6 +145,7 @@ public class Address extends AppCompatActivity {
                     n_city = etCity.getText().toString().trim();
                     tvEdit.setText("EDIT");
                     tvEdit.setTextColor(Color.parseColor("#b80000"));
+                    n_address = n_buildNo + ";" + n_landmark + ";" + n_area + ";" + n_city + ";" + n_state  + ";" + n_pincode;
                     updateAddr();
                 }
             }
@@ -161,7 +166,14 @@ public class Address extends AppCompatActivity {
                             JSONObject jsonResponse = new JSONObject(response);
                             boolean success = jsonResponse.getBoolean("success");
                             if (success) {
-                                Toast.makeText(Address.this, "UPDATE SUCCESSFUL", Toast.LENGTH_LONG).show();
+                                Intent inten = new Intent(Address.this, Profile.class);
+                                session.createLoginSession(email, name, phone, n_address, id, acname, acno, ifsc,balance,type,aid);
+                                startActivity(inten);
+                                inten.addCategory(Intent.CATEGORY_HOME);
+                                inten.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                startActivity(inten);
+                                Toast.makeText(Address.this, "UPDATE SUCCESSFUL",Toast.LENGTH_LONG ).show();
+                                finish();
                             } else {
                                 Toast.makeText(Address.this, "UPDATE FAILED", Toast.LENGTH_LONG).show();
                             }

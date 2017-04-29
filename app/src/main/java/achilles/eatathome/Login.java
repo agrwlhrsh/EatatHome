@@ -61,6 +61,14 @@ public class Login extends AppCompatActivity {
         ivGoogle = (ImageView)findViewById(R.id.ivGoogle);
         ivFb = (ImageView)findViewById(R.id.ivFb);
 
+        tvForPass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent inten = new Intent(Login.this, ForgotPass.class);
+                startActivity(inten);
+            }
+        });
+
         tvSignin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -118,16 +126,22 @@ public class Login extends AppCompatActivity {
                                         if(type.equalsIgnoreCase("CUST")){
                                             Intent inten = new Intent(Login.this, Profile.class);
                                             session.createLoginSession(email, name, phone, address, id, "", "", "",balance,type,"0");
+                                            inten.addCategory(Intent.CATEGORY_HOME);
+                                            inten.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                             startActivity(inten);
+                                            finish();
 
-                                        }else if(type.equalsIgnoreCase("SUPL")){
+                                        }else if(type.equalsIgnoreCase("SUPP")){
                                             String acname = jsonResponse.getString("acname");
                                             String acno = jsonResponse.getString("acno");
                                             String ifsc = jsonResponse.getString("ifsc");
                                             String aid = jsonResponse.getString("aid");
                                             Intent inten = new Intent(Login.this, Profile.class);
                                             session.createLoginSession(email, name, phone, address, id, acname, acno, ifsc,balance,type,aid);
+                                            inten.addCategory(Intent.CATEGORY_HOME);
+                                            inten.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                             startActivity(inten);
+                                            finish();
                                         }else{
                                             Toast.makeText(Login.this,"Unknown Error Occurred..",Toast.LENGTH_LONG).show();
                                         }

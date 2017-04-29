@@ -266,7 +266,7 @@
                 android:textSize="18sp"
                 android:text="LOGOUT"
                 android:padding="10dp"
-                android:layout_marginTop="70dp"
+                android:layout_marginTop="50dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="#fff"
@@ -274,7 +274,8 @@
                 />
             <TextView
                 android:id="@+id/tvCare"
-                android:fontFamily="cursive"
+                android:fontFamily="sans-serif"
+                android:textStyle="italic"
                 android:gravity="center"
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
@@ -284,7 +285,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
                 android:text="@string/message"
-                android:textSize="20sp"/>
+                android:textSize="13sp"/>
             <TextView
                 android:layout_marginBottom="5dp"
                 android:layout_marginTop="10dp"

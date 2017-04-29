@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -26,7 +27,8 @@ import java.util.Map;
 public class EditProfile extends AppCompatActivity {
 
     private static final String UPDATE_URL = "http://eatathome.pe.hu/Update.php";
-    String type = "",name = "", phone = "", id = "", email = "",address = "", acno = "", acname = "", ifsc = "", balance = "", pass = "";
+    private static final String TAG = "EEditing";
+    String type = "",name = "", phone = "", id = "", email = "",address = "", aid = "", acno = "", acname = "", ifsc = "", balance = "", pass = "";
     String new_name = "", new_phone = "", new_pass = "", new_confpass = "";
 
 
@@ -41,6 +43,7 @@ public class EditProfile extends AppCompatActivity {
 
         session = new SessionManager(getApplicationContext());
         session.checkLogin();
+
         HashMap<String, String> user = session.getUserDetails();
         name = user.get(SessionManager.KEY_NAME);
         type = user.get(SessionManager.KEY_TYPE);
@@ -52,6 +55,7 @@ public class EditProfile extends AppCompatActivity {
         acno = user.get(SessionManager.KEY_ACNO);
         acname= user.get(SessionManager.KEY_ACNAME);
         ifsc = user.get(SessionManager.KEY_IFSC);
+        aid = user.get(SessionManager.KEY_AID);
 
         tvBack = (TextView)findViewById(R.id.tvBack);
         tvSave = (TextView)findViewById(R.id.tvSave);
@@ -114,12 +118,18 @@ public class EditProfile extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         try {
+                            Log.w(TAG, "onResponse: " + response );
                             JSONObject jsonResponse = new JSONObject(response);
                             boolean success = jsonResponse.getBoolean("success");
                             progressDialog.dismiss();
                             if(success){
+                                session.createLoginSession(email, new_name, new_phone, address, id, acname, acno, ifsc,balance,type,aid);
                                 Intent inten = new Intent(EditProfile.this, Profile.class);
                                 startActivity(inten);
+                                inten.addCategory(Intent.CATEGORY_HOME);
+                                inten.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                startActivity(inten);
+                                finish();
                             }else{
                                 AlertDialog.Builder alert = new AlertDialog.Builder(EditProfile.this);
                                 alert.setTitle("Error");
