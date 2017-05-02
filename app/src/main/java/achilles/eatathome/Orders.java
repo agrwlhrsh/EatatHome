@@ -110,7 +110,7 @@ public class Orders extends AppCompatActivity {
                                     hash_list.put("oid", c.getString("oid"));
                                     hash_list.put("status", c.getString("status"));
                                     hash_list.put("address", c.getString("address"));
-                                    hash_list.put("quantity",c.getString("quantity"));
+                                    hash_list.put("quan",c.getString("quan"));
                                     hash_list.put("mname",c.getString("mname"));
                                     hash_list.put("items",c.getString("items"));
                                     hash_list.put("tid",c.getString("tid"));

@@ -46,7 +46,6 @@ public class OTP extends Activity {
 
     EditText etOTP;
     TextView tvApprove;
-    TextView tvResend;
 
     SessionManager session;
 
@@ -73,7 +72,6 @@ public class OTP extends Activity {
 
         etOTP = (EditText)findViewById(R.id.etOTP);
         tvApprove = (TextView)findViewById(R.id.tvApprove);
-        tvResend = (TextView)findViewById(R.id.tvResend);
 
         tvApprove.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -164,43 +162,43 @@ public class OTP extends Activity {
         progressDialog.setMessage("Connecting...");
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progressDialog.show();
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, SIGNUPCUST_URL,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            progressDialog.dismiss();
-                            JSONObject jsonResponse = new JSONObject(response);
-                            boolean success = jsonResponse.getBoolean("success");
-                            String id = jsonResponse.getString("id");
-                            String balance = jsonResponse.getString("balance");
-                            if(success) {
-                                session.createLoginSession(email, name, phone, address, id, "", "", "",balance,type, aid);
-                                Intent inten = new Intent(OTP.this, BrowseMenu.class);
-                                startActivity(inten);
-                                inten.addCategory(Intent.CATEGORY_HOME);
-                                inten.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                startActivity(inten);
-                                Toast.makeText(OTP.this,"REGISTRATION SUCCESSFUL",Toast.LENGTH_LONG ).show();
-                                finish();
-                            }
-                            else {
-                                Toast.makeText(OTP.this,"REGISTRATION FAILED",Toast.LENGTH_LONG ).show();
-                            }
-                        }
-                        catch (JSONException e) {
-                            progressDialog.dismiss();
-                            e.printStackTrace();
-                        }
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, SIGNUPCUST_URL, new Response.Listener<String>()
+        {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    progressDialog.dismiss();
+                    JSONObject jsonResponse = new JSONObject(response);
+                    boolean success = jsonResponse.getBoolean("success");
+                    String id = jsonResponse.getString("id");
+                    String balance = jsonResponse.getString("balance");
+                    if(success) {
+                        session.createLoginSession(email, name, phone, address, id, "", "", "",balance,type, aid);
+                        Intent inten = new Intent(OTP.this, BrowseMenu.class);
+                        startActivity(inten);
+                        inten.addCategory(Intent.CATEGORY_HOME);
+                        inten.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(inten);
+                        Toast.makeText(OTP.this,"REGISTRATION SUCCESSFUL",Toast.LENGTH_LONG ).show();
+                        finish();
                     }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        progressDialog.dismiss();
-                        Toast.makeText(OTP.this,error.toString(),Toast.LENGTH_LONG ).show();
+                    else {
+                        Toast.makeText(OTP.this,"REGISTRATION FAILED",Toast.LENGTH_LONG ).show();
                     }
-                }){
+                }
+                catch (JSONException e) {
+                    progressDialog.dismiss();
+                    e.printStackTrace();
+                }
+            }
+        },
+        new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                progressDialog.dismiss();
+                Toast.makeText(OTP.this,error.toString(),Toast.LENGTH_LONG ).show();
+            }
+        }){
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String> map = new HashMap<String,String>();
@@ -214,5 +212,10 @@ public class OTP extends Activity {
         };
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
     }
 }

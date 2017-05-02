@@ -130,6 +130,7 @@ public class Profile extends AppCompatActivity {
         item6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 session.logoutUser();
             }
         });

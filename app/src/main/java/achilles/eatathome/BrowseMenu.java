@@ -3,6 +3,7 @@ package achilles.eatathome;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -62,7 +63,7 @@ public class BrowseMenu extends AppCompatActivity {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     ArrayList<HashMap<String, String>> menuList;
-
+    ArrayList<HashMap<String, String>> menuVegList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -116,18 +117,85 @@ public class BrowseMenu extends AppCompatActivity {
                 if(veg == 1){
                     veg = 0;
                     ivVNV.setImageResource(R.drawable.nonveg);
+                    recyclerView.setHasFixedSize(true);
+                    mLayoutManager = new LinearLayoutManager(BrowseMenu.this);
+                    recyclerView.setLayoutManager(mLayoutManager);
+                    mAdapter = new MenuAdapter(menuList,null);
+                    recyclerView.setAdapter(mAdapter);
+                    MenuAdapter.Callback adapterListener = new MenuAdapter.Callback() {
+                        @Override
+                        public void onImageClick(final int left, final HashMap<String,String> cart, int select) {
+                            if(select == 1){
+                                bCheckout.setVisibility(View.VISIBLE);
+                                if(left > 0){
+                                    bCheckout.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            Intent intent = new Intent(BrowseMenu.this, PlaceOrder.class);
+                                            intent.putExtra("cart", cart);
+                                            startActivity(intent);
+                                        }
+                                    });
+                                }else {
+                                    bCheckout.setText("Out of Stock");
+                                    bCheckout.setBackgroundColor(Color.parseColor("#726969"));
+                                }
+
+                            }else {
+                                bCheckout.setVisibility(View.INVISIBLE);
+                            }
+                        }
+                    };
+
+
+                    MenuAdapter.setCallback(adapterListener);
                 }else{
                     veg = 1;
                     ivVNV.setImageResource(R.drawable.veg);
+                    recyclerView.setHasFixedSize(true);
+                    mLayoutManager = new LinearLayoutManager(BrowseMenu.this);
+                    recyclerView.setLayoutManager(mLayoutManager);
+                    mAdapter = new MenuAdapter(menuVegList,null);
+                    recyclerView.setAdapter(mAdapter);
+                    MenuAdapter.Callback adapterListener = new MenuAdapter.Callback() {
+                        @Override
+                        public void onImageClick(final int left, final HashMap<String,String> cart, int select) {
+                            if(select == 1){
+                                bCheckout.setVisibility(View.VISIBLE);
+                                if(left > 0){
+                                    bCheckout.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            Intent intent = new Intent(BrowseMenu.this, PlaceOrder.class);
+                                            intent.putExtra("cart", cart);
+                                            startActivity(intent);
+                                        }
+                                    });
+                                }else {
+                                    bCheckout.setText("Out of Stock");
+                                    bCheckout.setBackgroundColor(Color.parseColor("#726969"));
+                                }
+
+                            }else {
+                                bCheckout.setVisibility(View.INVISIBLE);
+                            }
+                        }
+                    };
+
+
+                    MenuAdapter.setCallback(adapterListener);
                 }
             }
         });
 
         menuList = new ArrayList<>();
+
+        menuVegList = new ArrayList<>();
         Log.w(TAG, "onCreate: Compulsory Call" );
         recyclerView =(RecyclerView) findViewById(R.id.my_recycler_view);
         Log.w(TAG, "onCreate: after listview initalization " );
         getMenuList();
+
     }
 
 
@@ -165,21 +233,51 @@ public class BrowseMenu extends AppCompatActivity {
                                     hash_list.put("sid",c.getString("sid"));
                                     hash_list.put("sold", c.getString("sold"));
                                     hash_list.put("mname",c.getString("mname"));
-                                    hash_list.put("quant",c.getString("quant"));
+                                    hash_list.put("quan",c.getString("quan"));
                                     hash_list.put("cost",c.getString("cost"));
                                     hash_list.put("veg", c.getString("veg"));
                                     hash_list.put("name", c.getString("name"));
                                     hash_list.put("rate",c.getString("rate"));
+                                    hash_list.put("items",c.getString("items"));
                                     // adding hash_list to hash_list list
                                     menuList.add(hash_list);
+                                    if(c.getString("veg").equalsIgnoreCase("1")){
+                                        menuVegList.add(hash_list);
+                                    }
                                     Log.w(TAG, "onResponse: Horaha hashlist" );
                                 }
                                 Log.w(TAG, "onResponse: " + menuList.toString() );
                                 recyclerView.setHasFixedSize(true);
                                 mLayoutManager = new LinearLayoutManager(BrowseMenu.this);
                                 recyclerView.setLayoutManager(mLayoutManager);
-                                mAdapter = new MenuAdapter(menuList);
+                                mAdapter = new MenuAdapter(menuList,null);
                                 recyclerView.setAdapter(mAdapter);
+                                MenuAdapter.Callback adapterListener = new MenuAdapter.Callback() {
+                                    @Override
+                                    public void onImageClick(final int left, final HashMap<String,String> cart, int select) {
+                                        if(select == 1){
+                                            bCheckout.setVisibility(View.VISIBLE);
+                                            if(left > 0){
+                                                bCheckout.setOnClickListener(new View.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(View v) {
+                                                        Intent intent = new Intent(BrowseMenu.this, PlaceOrder.class);
+                                                        intent.putExtra("cart", cart);
+                                                        startActivity(intent);
+                                                    }
+                                                });
+                                            }else {
+                                                bCheckout.setText("Out of Stock");
+                                                bCheckout.setBackgroundColor(Color.parseColor("#726969"));
+                                            }
+
+                                        }else {
+                                            bCheckout.setVisibility(View.INVISIBLE);
+                                        }
+                                    }
+                                };
+
+                                MenuAdapter.setCallback(adapterListener);
                             }
                             else{
                                 AlertDialog.Builder alert = new AlertDialog.Builder(BrowseMenu.this);
@@ -211,7 +309,7 @@ public class BrowseMenu extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String> map = new HashMap<String,String>();
-                Log.w(TAG, "getParams:");
+                Log.w(TAG, "getParams:" + aid);
                 map.put("aid", aid);
                 return map;
             }

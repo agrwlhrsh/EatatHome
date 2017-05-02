@@ -51,6 +51,8 @@ public class SessionManager
         editor.commit();
     }
 
+
+
     public void checkLogin(){
         if(!this.isLoggedIn()){
             Intent i = new Intent(_context, Login.class);
@@ -73,6 +75,7 @@ public class SessionManager
         user.put(KEY_IFSC, pref.getString(KEY_IFSC, null));
         user.put(KEY_BALANCE, pref.getString(KEY_BALANCE, null));
         user.put(KEY_TYPE, pref.getString(KEY_TYPE, null));
+        user.put(KEY_AID, pref.getString(KEY_AID, null));
         return user;
     }
 

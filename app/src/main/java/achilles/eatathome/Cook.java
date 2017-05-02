@@ -42,7 +42,7 @@ public class Cook extends AppCompatActivity {
         ifsc = user.get(SessionManager.KEY_IFSC);
         aid = user.get(SessionManager.KEY_AID);
 
-        ic1 = (RelativeLayout)findViewById(R.id.ic2);
+        ic1 = (RelativeLayout)findViewById(R.id.ic1);
         ic4 = (RelativeLayout)findViewById(R.id.ic4);
 
         ic1.setOnClickListener(new View.OnClickListener() {
