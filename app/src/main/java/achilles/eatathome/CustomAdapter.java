@@ -50,6 +50,9 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
             holder.label4.setText("FAILED");
             holder.label4.setTextColor(Color.parseColor("#E74A29"));
         }
+        if(myList.get(position).get("ttype").equalsIgnoreCase("3")){
+            holder.label.setText("Transferred to Bank");
+        }
         holder.label5.setText("Order # " +myList.get(position).get("oid"));
         holder.label6.setText("Date " + myList.get(position).get("date"));
     }

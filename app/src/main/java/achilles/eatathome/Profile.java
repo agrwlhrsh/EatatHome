@@ -3,6 +3,7 @@ package achilles.eatathome;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -47,6 +48,11 @@ public class Profile extends AppCompatActivity {
         ifsc = user.get(SessionManager.KEY_IFSC);
         aid = user.get(SessionManager.KEY_AID);
 
+        Log.w("TAG", "DETAILS OF SESSION " + "\n\nname : " + name + "\ntype : " + type
+                +"\nemail : "  + email + "\nphone : " + phone + "\nid : " + id+ "\naddress : "
+                +address + "\nbalance : " + balance + "\nacno : " + acno + "\nacname : " + acname
+                + "\nifsc : " + ifsc + "\naid : " + aid);
+
         ic1 = (RelativeLayout)findViewById(R.id.ic1);
         ic2 = (RelativeLayout)findViewById(R.id.ic2);
 
@@ -88,49 +94,53 @@ public class Profile extends AppCompatActivity {
         item5 = (TextView)findViewById(R.id.item5);
         item6 = (TextView)findViewById(R.id.item6);
         item7 = (TextView)findViewById(R.id.item7);
-        item8 = (TextView)findViewById(R.id.item8);
+//        item8 = (TextView)findViewById(R.id.item8);
 
 
         tvName.setText(name);
         tvPhone.setText(phone);
-        item8.setText("\u20B9 " + balance);
+//        item8.setText("\u20B9 " + balance);
         tvEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent inten = new Intent(Profile.this, EditProfile.class);
                 startActivity(inten);
-
             }
         });
+
+        if(type.equalsIgnoreCase("SUPP")){
+            item1.setVisibility(View.INVISIBLE);
+        }
 
         item2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent inten = new Intent(Profile.this, Wallet.class);
                 startActivity(inten);
-
             }
         });
+
         item1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent inten = new Intent(Profile.this, Orders.class);
                 startActivity(inten);
-
             }
         });
+
+        item7.setVisibility(View.INVISIBLE);
+
         item7.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent inten = new Intent(Profile.this, Address.class);
                 startActivity(inten);
-
             }
         });
+
         item6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 session.logoutUser();
             }
         });

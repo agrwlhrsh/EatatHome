@@ -68,6 +68,7 @@ public class OTP extends Activity {
             acname = intent.getStringExtra("acname");
             ifsc = intent.getStringExtra("ifsc");
             address = intent.getStringExtra("address");
+            aid = intent.getStringExtra("aid");
         }
 
         etOTP = (EditText)findViewById(R.id.etOTP);
@@ -140,7 +141,7 @@ public class OTP extends Activity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String> map = new HashMap<String,String>();
-                Log.w(TAG, "getParams: " + email + "," + pass+ "," + phone + "," + name + "," + acno +"," + acname+"," + ifsc +"," + address);
+                Log.w(TAG, "getParams: " + email + "," + pass+ "," + phone + "," + name + "," + acno +"," + acname+"," + ifsc +"," + address + "..." + aid);
                 map.put("email", email);
                 map.put("pass", pass);
                 map.put("phone",phone);
@@ -207,6 +208,7 @@ public class OTP extends Activity {
                 map.put("phone",phone);
                 map.put("name",name);
                 map.put("address",address);
+                map.put("aid",0+"");
                 return map;
             }
         };

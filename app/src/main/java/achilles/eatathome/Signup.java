@@ -51,8 +51,8 @@ public class Signup extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
 
-        final Intent intent = getIntent();
-        type = intent.getStringExtra("type");
+            final Intent intent = getIntent();
+            type = intent.getStringExtra("type");
 
         etName = (EditText)findViewById(R.id.etName);
         etEmail = (EditText)findViewById(R.id.etEmail);
@@ -211,7 +211,7 @@ public class Signup extends Activity {
     public void callSMS(){
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url ="http://www.redoxygen.net/sms.dll?Action=SendSMS&AccountId=CI00192044&Email=agarwal.harshnu@gmail.com&Password=XAec1kq0&Recipient="+phone+"&Message=Welcome%20to%20Eat@Home%20Family.%20Your%20OTP%20for%20registration%20is%20"+otp;
+        String url ="http://www.redoxygen.net/sms.dll?Action=SendSMS&AccountId=CI00192204&Email=ujjayinibose95@gmail.com&Password=Asr3rhO7&Recipient="+phone+"&Message=Welcome%20to%20Eat@Home%20Family.%20Your%20OTP%20for%20registration%20is%20"+otp;
 // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {

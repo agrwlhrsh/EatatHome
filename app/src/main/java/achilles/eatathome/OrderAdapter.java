@@ -32,7 +32,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
             label5 = (TextView) rowView.findViewById(R.id.label5);
             label6 = (TextView) rowView.findViewById(R.id.label6);
             tvOD = (TextView) rowView.findViewById(R.id.tvOD);
-            tvComplaints = (TextView) rowView.findViewById(R.id.tvComplaints);
+//            tvComplaints = (TextView) rowView.findViewById(R.id.tvComplaints);
             tvDC = (TextView) rowView.findViewById(R.id.tvDC);
             tvDT = (TextView) rowView.findViewById(R.id.tvDT);
             tvQ = (TextView) rowView.findViewById(R.id.tvQ);

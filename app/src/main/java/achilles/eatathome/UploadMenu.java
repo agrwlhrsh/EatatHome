@@ -5,11 +5,7 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
-import android.icu.text.SimpleDateFormat;
-import android.icu.util.Calendar;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -36,7 +32,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -46,8 +44,9 @@ public class UploadMenu extends AppCompatActivity {
     private int mYear,mMonth,mDay;
 
     private static final String EDITMENU_URL = "http://eatathome.pe.hu/EditMenu.php";
-    private static final String DELETEMENU_URL = "http://eatathome.pe.hu/DeleteMenu.php";
     private static final String UPLOADMENU_URL = "http://eatathome.pe.hu/UploadMenu.php";
+    private static final String SMENU_URL = "http://eatathome.pe.hu/SMenu_list.php";
+
     String date = "", menu = "", item = "", quan = "", cost = "", veg = "-1", time = "0";
 
     RelativeLayout ic1, ic4;
@@ -64,7 +63,6 @@ public class UploadMenu extends AppCompatActivity {
     String address = "";
     String aid = "0";
 
-    private static final String SMENU_URL = "http://eatathome.pe.hu/SMenu_list.php";
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter cAdapter;
@@ -112,7 +110,6 @@ public class UploadMenu extends AppCompatActivity {
         });
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View view) {
                 openDialog();
@@ -168,16 +165,15 @@ public class UploadMenu extends AppCompatActivity {
                                 recyclerView.setAdapter(cAdapter);
                                 UploadAdapter.Callback adapterListener = new UploadAdapter.Callback() {
 
-                                    @RequiresApi(api = Build.VERSION_CODES.N)
                                     @Override
                                     public void onUploadClick(HashMap<String, String> cart) {
                                         editMenu(cart);
                                     }
 
-                                    @Override
-                                    public void onDeleteClick(String mid) {
-                                        deleteMenu(mid);
-                                    }
+//                                    @Override
+//                                    public void onDeleteClick(String mid) {
+//                                        deleteMenu(mid);
+//                                    }
                                 };
                                 UploadAdapter.setCallback(adapterListener);
                             }
@@ -221,65 +217,63 @@ public class UploadMenu extends AppCompatActivity {
         requestQueue.add(stringRequest);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
     private void editMenu(HashMap<String, String> cart) {
         String mName = cart.get("mname");
         String mMid = cart.get("mid");
-        String mDate = cart.get("mname");
-        String mTime = cart.get("mid");
-        String mQuan = cart.get("mname");
-        String mCost = cart.get("mid");
+        String mDate = cart.get("date");
+        String mTime = cart.get("time");
+        String mQuan = cart.get("quan");
+        String mCost = cart.get("cost");
         String mVeg = cart.get("veg");
-        String mDesc = cart.get("desc");
+        String mDesc = cart.get("items");
+
         openEditDialog(mMid, mDate, mTime, mName, mDesc, mQuan,mCost, mVeg);
     }
 
-    private void deleteMenu(final String mid) {
-        final ProgressDialog progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Uploading...");
-        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        progressDialog.show();
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, DELETEMENU_URL,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            progressDialog.dismiss();
-                            JSONObject jsonResponse = new JSONObject(response);
-                            boolean success = jsonResponse.getBoolean("success");
-                            if(success) {
-                                Toast.makeText(UploadMenu.this,"Delete SUCCESSFUL",Toast.LENGTH_LONG ).show();
-                            }
-                            else {
-                                Toast.makeText(UploadMenu.this,"Delete FAILED",Toast.LENGTH_LONG ).show();
-                            }
-                        }
-                        catch (JSONException e) {
-                            progressDialog.dismiss();
-                            e.printStackTrace();
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        progressDialog.dismiss();
-                        Toast.makeText(UploadMenu.this,error.toString(),Toast.LENGTH_LONG ).show();
-                    }
-                }){
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String,String> map = new HashMap<String,String>();
-                map.put("mid", mid);
-                return map;
-            }
-        };
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(stringRequest);
-    }
+//    private void deleteMenu(final String mid) {
+//        final ProgressDialog progressDialog = new ProgressDialog(this);
+//        progressDialog.setMessage("Uploading...");
+//        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//        progressDialog.show();
+//        StringRequest stringRequest = new StringRequest(Request.Method.POST, DELETEMENU_URL,
+//                new Response.Listener<String>() {
+//                    @Override
+//                    public void onResponse(String response) {
+//                        try {
+//                            progressDialog.dismiss();
+//                            JSONObject jsonResponse = new JSONObject(response);
+//                            boolean success = jsonResponse.getBoolean("success");
+//                            if(success) {
+//                                Toast.makeText(UploadMenu.this,"Delete SUCCESSFUL",Toast.LENGTH_LONG ).show();
+//                            }
+//                            else {
+//                                Toast.makeText(UploadMenu.this,"Delete FAILED",Toast.LENGTH_LONG ).show();
+//                            }
+//                        }
+//                        catch (JSONException e) {
+//                            progressDialog.dismiss();
+//                            e.printStackTrace();
+//                        }
+//                    }
+//                },
+//                new Response.ErrorListener() {
+//                    @Override
+//                    public void onErrorResponse(VolleyError error) {
+//                        progressDialog.dismiss();
+//                        Toast.makeText(UploadMenu.this,error.toString(),Toast.LENGTH_LONG ).show();
+//                    }
+//                }){
+//            @Override
+//            protected Map<String, String> getParams() throws AuthFailureError {
+//                Map<String,String> map = new HashMap<String,String>();
+//                map.put("mid", mid);
+//                return map;
+//            }
+//        };
+//        RequestQueue requestQueue = Volley.newRequestQueue(this);
+//        requestQueue.add(stringRequest);
+//    }
 
-
-    @RequiresApi(api = Build.VERSION_CODES.N)
     private void openDialog(){
         LayoutInflater inflater = LayoutInflater.from(UploadMenu.this);
         View subView = inflater.inflate(R.layout.menu_form, null);
@@ -303,7 +297,8 @@ public class UploadMenu extends AppCompatActivity {
         tvCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                alertDialog.dismiss();
+                Intent inten = new Intent(UploadMenu.this, UploadMenu.class);
+                startActivity(inten);
             }
         });
 
@@ -326,6 +321,7 @@ public class UploadMenu extends AppCompatActivity {
                     alert.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
+
                             alertDialog.dismiss();
                             uploadMenu();
                         }
@@ -360,7 +356,7 @@ public class UploadMenu extends AppCompatActivity {
             public void onClick(View v) {
                 tvV.setBackgroundResource(R.drawable.vegbackground);
                 tvNV.setBackgroundResource(R.drawable.textcorner);
-                veg = "0";
+                veg = "1";
             }
         });
         tvNV.setOnClickListener(new View.OnClickListener() {
@@ -368,13 +364,13 @@ public class UploadMenu extends AppCompatActivity {
             public void onClick(View v) {
                 tvV.setBackgroundResource(R.drawable.textcorner);
                 tvNV.setBackgroundResource(R.drawable.nonvegbackground);
-                veg = "1";
+                veg = "0";
             }
         });
         final Calendar myCalendar = Calendar.getInstance();
 
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
-            @RequiresApi(api = Build.VERSION_CODES.N)
+
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear,
                                   int dayOfMonth) {
@@ -391,7 +387,6 @@ public class UploadMenu extends AppCompatActivity {
 
         etDate.setOnClickListener(new View.OnClickListener() {
 
-            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View v) {
                 final Calendar c = Calendar.getInstance();
@@ -414,7 +409,6 @@ public class UploadMenu extends AppCompatActivity {
         });
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
     private void openEditDialog(final String mMid, final String mDate, final String mTime, final String mName, final String mDesc, final String mQuan, final String mCost, final String mVeg){
         LayoutInflater inflater = LayoutInflater.from(UploadMenu.this);
         View subView = inflater.inflate(R.layout.menu_form, null);
@@ -491,7 +485,6 @@ public class UploadMenu extends AppCompatActivity {
                     alert.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            alertDialog.dismiss();
                             uploadEditMenu(mMid, date, time, menu,item, quan,cost, veg);
                         }
                     });
@@ -539,7 +532,7 @@ public class UploadMenu extends AppCompatActivity {
         final Calendar myCalendar = Calendar.getInstance();
 
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
-            @RequiresApi(api = Build.VERSION_CODES.N)
+
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear,
                                   int dayOfMonth) {
@@ -547,8 +540,7 @@ public class UploadMenu extends AppCompatActivity {
                 myCalendar.set(Calendar.YEAR, year);
                 myCalendar.set(Calendar.MONTH, monthOfYear);
                 myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                // myCalendar.add(Calendar.DATE, 0);
-                String myFormat = "dd-MM-yyyy"; //In which you need put here
+                String myFormat = "dd-MM-yyyy";
                 SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.getDefault());
                 etDate.setText(sdf.format(myCalendar.getTime()));
             }
@@ -556,7 +548,6 @@ public class UploadMenu extends AppCompatActivity {
 
         etDate.setOnClickListener(new View.OnClickListener() {
 
-            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View v) {
                 final Calendar c = Calendar.getInstance();
@@ -594,10 +585,12 @@ public class UploadMenu extends AppCompatActivity {
                             JSONObject jsonResponse = new JSONObject(response);
                             boolean success = jsonResponse.getBoolean("success");
                             if(success) {
-                                Toast.makeText(UploadMenu.this,"Upload SUCCESSFUL",Toast.LENGTH_LONG ).show();
+                                Intent inten = new Intent(UploadMenu.this, UploadMenu.class);
+                                startActivity(inten);
+                                Toast.makeText(UploadMenu.this,"UPLOAD SUCCESSFUL",Toast.LENGTH_LONG ).show();
                             }
                             else {
-                                Toast.makeText(UploadMenu.this,"Upload FAILED",Toast.LENGTH_LONG ).show();
+                                Toast.makeText(UploadMenu.this,"UPLOAD FAILED",Toast.LENGTH_LONG ).show();
                             }
                         }
                         catch (JSONException e) {
@@ -626,6 +619,7 @@ public class UploadMenu extends AppCompatActivity {
                 map.put("veg",mVeg);
                 map.put("quan",mQuan);
                 map.put("aid",aid);
+                Log.w(TAG, "getParams: " + mMid + ":"+ id + ":"+ mName + ":"+ mDesc + ":"+ mCost + ":"+ mTime + ":"+ mDate + ":"+ mVeg + ":"+ mQuan + ":"+ aid );
                 return map;
             }
         };
@@ -648,7 +642,8 @@ public class UploadMenu extends AppCompatActivity {
                             boolean success = jsonResponse.getBoolean("success");
                             if(success) {
                                 Toast.makeText(UploadMenu.this,"Upload SUCCESSFUL",Toast.LENGTH_LONG ).show();
-                            }
+                                Intent inten = new Intent(UploadMenu.this, UploadMenu.class);
+                                startActivity(inten);                            }
                             else {
                                 Toast.makeText(UploadMenu.this,"Upload FAILED",Toast.LENGTH_LONG ).show();
                             }

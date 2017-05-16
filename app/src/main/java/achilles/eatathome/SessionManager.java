@@ -51,7 +51,10 @@ public class SessionManager
         editor.commit();
     }
 
-
+    public void updateBalance(String balance){
+        editor.putString(KEY_BALANCE, balance);
+        editor.commit();
+    }
 
     public void checkLogin(){
         if(!this.isLoggedIn()){
