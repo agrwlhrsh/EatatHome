@@ -1,8 +1,6 @@
 <?php
 
     $aid = $_POST["aid"];
-    $aid = "1";
-
     $conn = mysqli_connect("mysql.hostinger.in", "u403310507_app", "eat@home123", "u403310507_app");
     $response = array();
     $response["success"] = false;
@@ -32,7 +30,8 @@
                 if($result2 = mysqli_query($conn, $sql2)){
                     $row2 = mysqli_fetch_array($result2, MYSQLI_ASSOC);
                     $row_array['name'] = $row2['name'];
-                    $row_array['rate'] = $row2['rate'];
+                    $row_array['s_balance'] = $row2['balance'];
+                    $row_array['sup_address'] = $row2["name"].";".$row2['address'];
                 }
                 mysqli_free_result($result2);
                 array_push($order_array, $row_array);

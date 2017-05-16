@@ -2,7 +2,6 @@
 
     $id = $_POST["id"];
     $type = $_POST["type"];
-//    $id = "1";
 //    $type = "CUST";
 //    $email = "email";
 //    $type = "SUPP";
@@ -18,13 +17,18 @@
     }
     else{
         if($type === "CUST"){
+            $sql2 = "SELECT * FROM customer WHERE cid = '".$id."'";
             $sql="SELECT * FROM transaction WHERE id = 'c".$id."'";
         }else{
             
+            $sql2 = "SELECT * FROM supplier WHERE sid = '".$id."'";
             $sql="SELECT * FROM transaction WHERE id = 's".$id."'";
         }
         
-        if($result=mysqli_query($conn,$sql)){
+        if(($result=mysqli_query($conn,$sql)) && ($result2=mysqli_query($conn,$sql2))){
+            while($row2 = mysqli_fetch_array($result2, MYSQLI_ASSOC)){
+                $response['balance'] = $row2['balance'];
+            }
             $response["success"] = true;
             while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
                 $row_array['tid'] = $row['tid'];
