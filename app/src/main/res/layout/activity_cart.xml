@@ -40,6 +40,12 @@
             android:layout_weight="1"/>
     </LinearLayout>
     <TextView
+        android:text="asdsadgf"
+        android:layout_below="@id/rlTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvCart"/>
+    <TextView
         android:id="@+id/tvLine"
         android:text=" "
         android:background="#555"

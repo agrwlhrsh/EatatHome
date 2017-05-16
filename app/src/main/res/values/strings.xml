@@ -5,9 +5,9 @@
     <string name="serve"><b>I will serve</b></string>
     <string name="approve"><b>Approve</b></string>
     <string name="tnc">I accept the Terms and Condition</string>
-    <string name="message">Created and Served with Love from a Maa to Care for her child!!!</string>
-    <string name="version">Version 0.1</string>
+    <string name="version">Version 0.2</string>
     <string name="Rs">\u20B9 00</string>
     <string name="nn">+91 - </string>
     <string name="title_activity_upload_menu">UploadMenu</string>
+    <string name="messages">Created and Served with Love from a Maa to Care for her child!!!</string>
 </resources>
