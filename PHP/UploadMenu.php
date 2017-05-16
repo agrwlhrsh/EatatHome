@@ -9,7 +9,7 @@
     $time = $_POST["time"];
     $date = $_POST["date"];
     $sold = "0";
-//    $sid = "1";
+
 //    $aid = "1";
 //    $items = "Chilli Paneer, Chowmein";
 //    $mname = "Chineese";
