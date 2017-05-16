@@ -9,6 +9,7 @@
     $acname = $_POST["acname"];
     $aid = $_POST["aid"];
     $balance = "0";
+    $rate = "0";
 //    $name = "name"; 
 //    $email = "email";
 //    $address = "address";
@@ -17,7 +18,7 @@
 //    $ifsc = "ifsc";
 //    $acno = "1234";
 //    $acname = "acname";    
-    
+//    $aid = "1";
     $conn = mysqli_connect("mysql.hostinger.in", "u403310507_app", "eat@home123", "u403310507_app");
     $response = array();
     $response["success"] = false;
@@ -27,8 +28,8 @@
         echo json_encode($response);  
     }
     else{
-        $statement = mysqli_prepare($conn,"INSERT INTO supplier (name, email, address, phone, pass, ifsc, acno, acname, balance,aid) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
-        mysqli_stmt_bind_param($statement, 'ssssssssss', $name, $email, $address, $phone, $pass, $ifsc, $acno, $acname, $balance,$aid);
+        $statement = mysqli_prepare($conn,"INSERT INTO supplier (name, email, address, phone, pass, ifsc, acno, acname, rate, balance,aid) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        mysqli_stmt_bind_param($statement, 'sssssssssss', $name, $email, $address, $phone, $pass, $ifsc, $acno, $acname, $balance,$rate, $aid);
         mysqli_stmt_execute($statement);
         $response["success"] = true;
         $sql="SELECT * FROM supplier WHERE email = '".$email."'";

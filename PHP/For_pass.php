@@ -1,7 +1,7 @@
 
 <?php
 $email = $_POST['email'];
-$email = 'agarwal.harshnu@gmail.com';
+//$email = 'agarwal.harsh@gmail.com';
 $to = $email;
 $subject = "Forgot Password";
 $new_pass = substr(str_shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"), -6);
@@ -9,7 +9,7 @@ $txt = "Your New Password in the registered email id is : ".$new_pass."\r\n You 
 $conn = mysqli_connect("mysql.hostinger.in", "u403310507_app", "eat@home123", "u403310507_app");
 
 $response["success"] = false;
-$response["exist"] = true;
+$response["exist"] = false;
 $response["update"] = false;
 
 if(mysqli_connect_errno()){

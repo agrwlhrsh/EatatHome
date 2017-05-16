@@ -11,8 +11,6 @@
     $response["exists"] = true;
     $response["success"] = false;
     if(mysqli_connect_errno()){
-        //Connection Error
-        echo "Failed to Connect to MySQL: " .mysqli_connect_error();
         echo json_encode($response);  
     }
     else{

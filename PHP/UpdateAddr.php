@@ -2,8 +2,7 @@
     $id = $_POST["id"];
     $type = $_POST["type"];
     $address = $_POST["address"];
-//
-//    $id = "1";
+
 //    $type = "SUPP";
 //    $address = "v;v;v;v;v;v";
 

@@ -37,6 +37,7 @@
                         $response["phone"] = $row[3];
                         $response["address"] = $row[4];
                         $response["balance"] = $row[6];
+                        
                     }
                 }
             }
@@ -62,7 +63,7 @@
                                 $response["acno"] = $row[7];
                                 $response["acname"] = $row[8];
                                 $response["balance"] = $row[9];
-                                $response["aid"] = $row[10];
+                                $response["aid"] = $row[11];
                             }
                         }
                     }
