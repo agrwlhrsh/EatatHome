@@ -293,7 +293,8 @@ public class UploadMenu extends AppCompatActivity {
         builder.setView(subView);
         final AlertDialog alertDialog = builder.create();
         builder.show();
-
+        
+        //BUD id 31 resolved.. Cancel was not working so called a new Intent.. Now working fine..
         tvCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -302,6 +303,7 @@ public class UploadMenu extends AppCompatActivity {
             }
         });
 
+        //BUG id 27 resolved.. Not working hence reopening the asme activity.. Now working fine..
         tvUpload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

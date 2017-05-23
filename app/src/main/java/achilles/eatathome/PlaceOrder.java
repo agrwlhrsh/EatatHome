@@ -61,7 +61,6 @@ public class PlaceOrder extends AppCompatActivity {
     float cost, wallet = 0;
     float grand_total,total = 0;
     float paybill = 0;
-    boolean use_wallet = false;
     String n_name = "";
     String del_address = "";
     String delAddr = "";
@@ -242,8 +241,9 @@ public class PlaceOrder extends AppCompatActivity {
         sid = cart.get("sid");
         s_balance = Float.parseFloat(cart.get("s_balance"));
         sup_address = cart.get("sup_address");
-
+        //BUG id 33 resolved.. issue because updated at wrong place
         tvPrice.setText(cost+"");
+        //BUG id 29 resolved.. Issue because update at wrong place..
         tvItemName.setText(mname);
 
         tvBack.setOnClickListener(new View.OnClickListener() {
@@ -346,7 +346,8 @@ public class PlaceOrder extends AppCompatActivity {
                                 Intent inten = new Intent(PlaceOrder.this, Bill.class);
                                 inten.putExtra("oid",oid);
                                 inten.putExtra("payment","COD");
-                                inten.putExtra("amount",grand_total);
+                                //Bug id 38 Showing null in place of AMOUNT TO BE PAID..
+                                inten.putExtra("amount",paybill+"");
                                 inten.putExtra("tid","0");
                                 inten.putExtra("did",did);
                                 inten.addCategory(Intent.CATEGORY_HOME);
@@ -419,6 +420,7 @@ public class PlaceOrder extends AppCompatActivity {
     }
 
     private void updateBill() {
+        // bug id 30 resolved. deliver cost updated wrong
         delivery = 0;
         packing = 0;
         discount = 0;

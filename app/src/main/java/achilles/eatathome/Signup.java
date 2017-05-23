@@ -211,7 +211,7 @@ public class Signup extends Activity {
     public void callSMS(){
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url ="http://www.redoxygen.net/sms.dll?Action=SendSMS&AccountId=CI00192204&Email=ujjayinibose95@gmail.com&Password=Asr3rhO7&Recipient="+phone+"&Message=Welcome%20to%20Eat@Home%20Family.%20Your%20OTP%20for%20registration%20is%20"+otp;
+        String url ="http://www.redoxygen.net/sms.dll?Action=SendSMS&AccountId=CI00192463&Email=twinki.sarkar30@gmail.com&Password=Kqk4sLq8&Recipient="+phone+"&Message=Welcome%20to%20Eat@Home%20Family.%20Your%20OTP%20for%20registration%20is%20"+otp;
 // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {

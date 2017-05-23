@@ -121,6 +121,7 @@ public class Payment extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == PayUMoney_Constants.PAYMENT_REQUEST) {
             if (resultCode == RESULT_OK) {
+                //bud id : 37  removed the progress dialog as app was stopping after payment
                 Toast.makeText(this, "PAYMENT SUCCESSFUL", Toast.LENGTH_SHORT).show();
                 transtatus = "1";
                 tid = data.getStringExtra("result");
@@ -137,7 +138,7 @@ public class Payment extends AppCompatActivity {
                 finish();
 
             } else if (resultCode == RESULT_CANCELED) {
-
+                //bud id : 37  removed the progress dialog as app was stopping after payment
                 Toast.makeText(this, "PAYMENT FAILED", Toast.LENGTH_SHORT).show();
                 transtatus = "0";
                 oid = "0";

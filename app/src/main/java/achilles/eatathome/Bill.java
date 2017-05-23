@@ -31,8 +31,11 @@ public class Bill extends AppCompatActivity {
 
         tvStatus = (TextView)findViewById(R.id.tvStatus);
         tvBack = (TextView)findViewById(R.id.tvBack);
-
-        tvStatus.setText(status + "\n" + amount + "\n" + tid);
+        if(status.equalsIgnoreCase("COD")){
+            tvStatus.setText("Cash On Delivery" + "\n Pay Rs. " + amount + " in cash to Delivery Person\nOrder Number #" + oid);
+        }else{
+            tvStatus.setText(status + "\n" + amount + "\n" + tid);
+        }
 
         tvBack.setOnClickListener(new View.OnClickListener() {
             @Override
