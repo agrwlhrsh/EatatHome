@@ -19,19 +19,23 @@
             android:layout_weight="4"
             android:layout_width="0dp"
             android:layout_height="match_parent">
-            <TextView
+            <!--<TextView-->
+                <!--android:paddingLeft="10dp"-->
+                <!--android:paddingTop="2dp"-->
+                <!--android:text="Choose Location"-->
+                <!--android:textColor="#444"-->
+                <!--android:textSize="21sp"-->
+                <!--android:id="@+id/tvArea"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content" />-->
+            <Button
+                android:gravity="left|center_vertical"
+                android:textSize="20sp"
+                style="?android:attr/textViewStyle"
+                android:textColor="#000000"
+                android:text="Select Location"
+                android:background="@drawable/spinnerbutton"
                 android:paddingLeft="10dp"
-                android:paddingTop="2dp"
-                android:text="Choose Location"
-                android:textColor="#444"
-                android:textSize="21sp"
-                android:id="@+id/tvArea"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-            <Spinner
-                android:paddingLeft="10dp"
-                android:paddingBottom="2dp"
-                android:layout_below="@id/tvArea"
                 android:id="@+id/tvAreaDet"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
@@ -166,7 +170,7 @@
         android:textColor="#fff"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/background"
+        android:background="@color/background1"
         android:text="Proceed to Checkout"/>
     <TextView
         android:padding="20dp"

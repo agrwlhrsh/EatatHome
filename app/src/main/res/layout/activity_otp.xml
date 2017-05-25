@@ -5,14 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/background"
+    android:background="@color/background1"
     tools:context="achilles.eatathome.OTP">
     <ImageView
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:id="@+id/ivChef"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/chef1"/>
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/chef3"/>
     <EditText
         android:textColor="@color/textC"
         android:textColorHint="@color/hintC"
@@ -30,22 +31,12 @@
     <TextView
         android:textColor="@color/textC"
         android:fontFamily="cursive"
-        android:textSize="40sp"
-        android:text="@string/approve"
+        android:textSize="35sp"
+        android:text="Approve"
         android:layout_marginTop="30dp"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/etOTP"
         android:id="@+id/tvApprove"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-    <TextView
-        android:textColor="@color/textC"
-        android:textSize="18sp"
-        android:text="@string/resend"
-        android:layout_marginTop="30dp"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/tvApprove"
-        android:id="@+id/tvResend"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 

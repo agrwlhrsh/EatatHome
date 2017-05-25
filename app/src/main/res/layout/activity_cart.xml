@@ -39,12 +39,41 @@
             android:layout_height="match_parent"
             android:layout_weight="1"/>
     </LinearLayout>
-    <TextView
-        android:text="asdsadgf"
+    <ScrollView
+
+        android:paddingTop="5dp"
+        android:scrollbars="none"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:background="@color/mainbackground"
         android:layout_below="@id/rlTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/tvCart"/>
+        android:layout_above="@id/tvLine"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_centerHorizontal="true"
+                android:text="Scheduled Delivery"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvCart"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_below="@id/tvCart"
+                android:paddingBottom="10dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="20dp"
+                android:id="@+id/my_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="vertical" />
+        </RelativeLayout>
+
+    </ScrollView>
+
     <TextView
         android:id="@+id/tvLine"
         android:text=" "
@@ -100,7 +129,7 @@
 
             <TextView
                 android:padding="2dp"
-                android:textColor="@color/background"
+                android:textColor="@color/background1"
                 android:textSize="10sp"
                 android:layout_centerHorizontal="true"
                 android:text="CART"

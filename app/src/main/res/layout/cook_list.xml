@@ -88,27 +88,26 @@
         </LinearLayout>
 
     </LinearLayout>
-    <!--<TextView-->
-        <!--android:layout_below="@id/ll1"-->
-        <!--android:id="@+id/tvLine3"-->
-        <!--android:background="#999"-->
-        <!--android:layout_width="fill_parent"-->
-        <!--android:layout_height="0.1dp"/>-->
-    <!--<LinearLayout-->
-        <!--android:layout_below="@id/tvLine3"-->
-        <!--android:gravity="center"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content">-->
-
-        <!--<TextView-->
-            <!--android:id="@+id/tvUpload"-->
-            <!--android:padding="10dp"-->
-            <!--android:gravity="center"-->
-            <!--android:textSize="15sp"-->
-            <!--android:text="UPLOAD AGAIN"-->
-            <!--android:textColor="#33dd44"-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_weight="1"/>-->
-    <!--</LinearLayout>-->
+    <TextView
+    android:layout_below="@id/ll1"
+    android:id="@+id/tvLine3"
+    android:background="#999"
+    android:layout_width="fill_parent"
+    android:layout_height="0.1dp"/>
+    <LinearLayout
+    android:layout_below="@id/tvLine3"
+    android:gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tvSold"
+            android:padding="10dp"
+            android:gravity="center"
+            android:textSize="15sp"
+            android:text="TO COOK : "
+            android:textColor="#b80000"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+    </LinearLayout>
 </RelativeLayout>

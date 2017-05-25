@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/background"
+    android:background="@color/background1"
     tools:context="achilles.eatathome.CookSignup">
     <ScrollView
         android:id="@+id/sv1"
@@ -83,59 +83,37 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Address"/>
-
-            <EditText
-                android:backgroundTint="@color/textC"
+            <TextView
+                android:visibility="gone"
                 android:textColorHint="@color/hintC"
                 android:textColor="@color/textC"
                 android:layout_below="@id/tvAddress"
-                android:id="@+id/etPincode"
+                android:id="@+id/tvArea"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
-                android:paddingLeft="20dp"
                 android:paddingRight="20dp"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
-                android:inputType="number"
-                android:hint="Pincode"/>
-            <LinearLayout
-                android:layout_marginTop="5dp"
-                android:layout_marginRight="30dp"
-                android:layout_marginLeft="30dp"
-                android:layout_below="@id/etPincode"
-                android:orientation="horizontal"
-                android:id="@+id/llAddr"
+                android:hint="Select Area"/>
+            <Button
+                android:paddingLeft="20dp"
+                style="?android:attr/editTextStyle"
+                android:text="Select Location"
+                android:layout_below="@id/tvArea"
+                android:id="@+id/spArea"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <EditText
-                    android:id="@+id/etState"
-                    android:layout_marginRight="5dp"
-                    android:textSize="20sp"
-                    android:backgroundTint="@color/textC"
-                    android:textColorHint="@color/hintC"
-                    android:textColor="@color/textC"
-                    android:paddingLeft="20dp"
-                    android:hint="State"
-                    android:layout_weight="1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-                <EditText
-                    android:id="@+id/etCity"
-                    android:layout_marginLeft="5dp"
-                    android:textSize="20sp"
-                    android:backgroundTint="@color/textC"
-                    android:textColorHint="@color/hintC"
-                    android:textColor="@color/textC"
-                    android:paddingLeft="20dp"
-                    android:hint="City"
-                    android:layout_weight="1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    />
-            </LinearLayout>
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:textColorHint="@color/hintC"
+                android:textColor="@color/hintC"
+                android:backgroundTint="@color/textC"/>
+
+
             <EditText
-                android:layout_below="@id/llAddr"
+                android:layout_below="@id/spArea"
                 android:id="@+id/etBuildNo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -152,22 +130,6 @@
                 android:textColor="@color/textC"/>
             <EditText
                 android:layout_below="@id/etBuildNo"
-                android:id="@+id/etArea"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:layout_marginTop="5dp"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
-                android:inputType="text"
-                android:hint="Area"
-                android:backgroundTint="@color/textC"
-                android:textColorHint="@color/hintC"
-                android:textColor="@color/textC"/>
-            <EditText
-                android:layout_below="@id/etArea"
                 android:id="@+id/etLandmark"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -178,7 +140,7 @@
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
                 android:inputType="text"
-                android:hint="Landmark (Optional)"
+                android:hint="Landmark"
                 android:backgroundTint="@color/textC"
                 android:textColorHint="@color/hintC"
                 android:textColor="@color/textC"/>

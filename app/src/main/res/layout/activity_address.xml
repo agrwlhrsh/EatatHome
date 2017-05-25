@@ -74,7 +74,7 @@
                 android:layout_height="wrap_content"
                 android:text="EDIT"
                 android:textSize="15sp"
-                android:textColor="@color/background"/>
+                android:textColor="@color/background1"/>
         </LinearLayout>
         <EditText
             android:textSize="16sp"

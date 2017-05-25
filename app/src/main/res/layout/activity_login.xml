@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/background"
+    android:background="@color/background1"
     tools:context="achilles.eatathome.Login">
     <ScrollView
         android:id="@+id/sv1"
@@ -13,7 +13,7 @@
         android:layout_height="match_parent">
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
             <LinearLayout
                 android:layout_marginTop="20dp"
                 android:layout_centerHorizontal="true"
@@ -33,11 +33,14 @@
             </LinearLayout>
 
             <EditText
-                android:layout_below="@id/lliv"
-                android:textSize="20sp"
-                android:id="@+id/etEmail"
-                android:layout_marginTop="20dp"
                 android:paddingLeft="20dp"
+                android:paddingTop="7dp"
+                android:paddingBottom="7dp"
+                android:background="@drawable/upround"
+                android:layout_below="@id/lliv"
+                android:textSize="17sp"
+                android:id="@+id/etEmail"
+                android:layout_marginTop="50dp"
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="40dp"
                 android:layout_width="match_parent"
@@ -45,21 +48,20 @@
                 android:inputType="textEmailAddress"
                 android:hint="Email Id"
                 android:gravity="left"
-                android:backgroundTint="@color/textC"
                 android:textColorHint="@color/hintC"
-                android:textColor="@color/textC" />
+                android:textColor="#000000" />
 
             <EditText
-                android:drawablePadding="20sp"
-                android:paddingRight="10dp"
+                android:paddingLeft="20dp"
+                android:paddingTop="7dp"
+                android:paddingBottom="7dp"
+                android:background="@drawable/downround"
                 android:textColorHint="@color/hintC"
-                android:textColor="@color/textC"
-                android:backgroundTint="@color/textC"
-                android:textSize="20sp"
+                android:textColor="#000000"
+                android:textSize="17sp"
                 android:fontFamily="sans-serif"
                 android:layout_below="@+id/etEmail"
-                android:paddingLeft="20dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="1dp"
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="40dp"
                 android:id="@+id/etPass"
@@ -70,13 +72,14 @@
                 android:inputType="textPassword" />
 
             <TextView
+                android:paddingBottom="8dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginLeft="45dp"
                 android:textColor="@color/textC"
-                android:textSize="17sp"
+                android:textSize="16sp"
                 android:id="@+id/tvForPass"
                 android:layout_below="@+id/etPass"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Forgot Password?" />
 
@@ -90,20 +93,22 @@
                 android:layout_centerInParent="true"
                 android:layout_below="@+id/tvForPass"
                 android:fontFamily="cursive"
-                android:textSize="40sp"/>
+                android:textSize="30sp"/>
 
             <TextView
                 android:fontFamily="casual"
-                android:textSize="18sp"
-                android:layout_marginTop="20dp"
+                android:textSize="17sp"
+                android:layout_marginTop="30dp"
                 android:layout_centerInParent="true"
                 android:textColor="@color/textC"
                 android:layout_below="@+id/tvSignin"
                 android:id="@+id/tvSignUp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="New User? Register Here!!"/>
+                android:text="New User? Register Here!!"
+                android:layout_marginBottom="20dp"/>
             <TextView
+                android:visibility="gone"
                 android:layout_marginTop="15dp"
                 android:layout_below="@id/tvSignUp"
                 android:textColor="@color/textC"
@@ -115,6 +120,7 @@
                 android:layout_centerHorizontal="true"/>
 
             <LinearLayout
+                android:visibility="gone"
                 android:layout_below="@id/tvConnect"
                 android:layout_centerHorizontal="true"
                 android:id="@+id/llGFB"

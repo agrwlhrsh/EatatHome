@@ -72,7 +72,7 @@
                 android:src="@drawable/menu"/>
             <TextView
                 android:padding="2dp"
-                android:textColor="@color/background"
+                android:textColor="@color/background1"
                 android:textSize="10sp"
                 android:layout_centerHorizontal="true"
                 android:text="MENU"
@@ -129,7 +129,6 @@
         </RelativeLayout>
     </LinearLayout>
     <ScrollView
-
         android:paddingTop="5dp"
         android:scrollbars="none"
         android:paddingLeft="10dp"
@@ -147,7 +146,7 @@
             android:id="@+id/my_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:scrollbars="vertical" />
+            android:scrollbars="none" />
     </ScrollView>
     <RelativeLayout
         android:layout_width="match_parent"

@@ -91,32 +91,32 @@
                     android:layout_below="@id/tvBal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-                    <TextView
-                        android:id="@+id/tvAdd"
-                        android:padding="5dp"
-                        android:textColor="#33aa33"
-                        android:gravity="end|center_vertical"
-                        android:textSize="14sp"
-                        android:text="Add Money to Wallet"
-                        android:layout_weight="1"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent" />
-                    <TextView
-                        android:layout_marginBottom="10dp"
-                        android:layout_marginTop="10dp"
-                        android:background="#666"
-                        android:textSize="30sp"
-                        android:gravity="center"
-                        android:layout_weight="0"
-                        android:layout_width="0.1dp"
-                        android:layout_height="match_parent" />
+                    <!--<TextView-->
+                        <!--android:id="@+id/tvAdd"-->
+                        <!--android:padding="5dp"-->
+                        <!--android:textColor="#33aa33"-->
+                        <!--android:gravity="end|center_vertical"-->
+                        <!--android:textSize="14sp"-->
+                        <!--android:text="Add Money to Wallet"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:layout_width="0dp"-->
+                        <!--android:layout_height="match_parent" />-->
+                    <!--<TextView-->
+                        <!--android:layout_marginBottom="10dp"-->
+                        <!--android:layout_marginTop="10dp"-->
+                        <!--android:background="#666"-->
+                        <!--android:textSize="30sp"-->
+                        <!--android:gravity="center"-->
+                        <!--android:layout_weight="0"-->
+                        <!--android:layout_width="0.1dp"-->
+                        <!--android:layout_height="match_parent" />-->
                     <TextView
 
                         android:id="@+id/tvWithdraw"
-                        android:padding="5dp"
+                        android:padding="10dp"
                         android:textColor="#f74848"
-                        android:gravity="start|center_vertical"
-                        android:textSize="14sp"
+                        android:gravity="center"
+                        android:textSize="15sp"
                         android:text="Withdraw to Bank"
                         android:layout_weight="1"
                         android:layout_width="0dp"
