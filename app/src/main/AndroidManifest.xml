@@ -30,7 +30,11 @@
         <activity android:name=".Cart" />
         <activity android:name=".Login" />
         <activity android:name=".Cook" />
-        <activity android:name=".ForgotPass"></activity>
+        <activity android:name=".ForgotPass" />
+        <activity android:name=".PlaceOrder" />
+        <activity android:name=".Payment" />
+        <activity android:name=".MakePaymentActivity" />
+        <activity android:name=".Bill"></activity>
     </application>
 
 </manifest>
