@@ -3,6 +3,7 @@ package achilles.eatathome;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -10,13 +11,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
@@ -32,9 +31,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.StringTokenizer;
 
 public class BrowseMenu extends Activity {
 
@@ -55,7 +56,7 @@ public class BrowseMenu extends Activity {
     int veg = 0;
     TextView tvDefault;
     TextView tvArea;
-    Spinner tvAreaDet;
+    Button tvAreaDet;
     ImageView ivVNV;
     Button bDefault;
     Button bCheckout;
@@ -78,7 +79,10 @@ public class BrowseMenu extends Activity {
     List<String> anamelist = new ArrayList<String>();
 
     ArrayAdapter<String> dataAdapter;
-
+    private int mYear;
+    private int mDay;
+    private int mMonth;
+    private int mHour;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -101,7 +105,11 @@ public class BrowseMenu extends Activity {
 
         menuList = new ArrayList<>();
         menuVegList = new ArrayList<>();
-
+        final Calendar c = Calendar.getInstance();
+        mYear = c.get(Calendar.YEAR);
+        mMonth = c.get(Calendar.MONTH)+1;
+        mDay = c.get(Calendar.DAY_OF_MONTH);
+        mHour = c.get(Calendar.HOUR_OF_DAY);
 
         getAreaList();
 
@@ -127,27 +135,46 @@ public class BrowseMenu extends Activity {
         ivVNV = (ImageView)findViewById(R.id.ivVNV);
         //bDefault = (Button)findViewById(R.id.bDefault);
         bCheckout = (Button)findViewById(R.id.bCheckout);
-        tvArea = (TextView)findViewById(R.id.tvArea);
-        tvAreaDet = (Spinner)findViewById(R.id.tvAreaDet);
+//        tvArea = (TextView)findViewById(R.id.tvArea);
+        tvAreaDet = (Button)findViewById(R.id.tvAreaDet);
         tvDefault = (TextView)findViewById(R.id.tvDefault);
         svMenu = (ScrollView)findViewById(R.id.svMenu);
 
 
-
-        tvAreaDet.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        tvAreaDet.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                tvArea.setText(anamelist.get(position));
-                delAddr = categories.get(position);
-                aid = aidlist.get(position);
-                getMenuList(aid);
-            }
+            public void onClick(View v) {
+                new AlertDialog.Builder(BrowseMenu.this)
+                        .setTitle("Select Area")
+                        .setAdapter(dataAdapter, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int position) {
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
+                                // TODO: user specific action
+                                tvAreaDet.setText(anamelist.get(position));
+                                delAddr = categories.get(position);
+                                aid = (position+1)+"";
+                                dialog.dismiss();
+                                getMenuList(aid);
+                            }
+                        }).create().show();
 
             }
         });
+//        tvAreaDet.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                tvArea.setText(anamelist.get(position));
+//                delAddr = categories.get(position);
+//                aid = aidlist.get(position);
+//                getMenuList(aid);
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parent) {
+//
+//            }
+//        });
 
         ivVNV.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -254,11 +281,44 @@ public class BrowseMenu extends Activity {
                                         hash_list.put("items", c.getString("items"));
                                         hash_list.put("s_balance", c.getString("s_balance"));
                                         hash_list.put("sup_address", c.getString("sup_address"));
+                                        String date = c.getString("date");
+                                        String time = c.getString("time");
+                                        boolean flag = false;
+//                                      BUG id : 111 resolved. Now the Menu is Filtered according to available Slots
+                                        StringTokenizer st = new StringTokenizer(date,"-");
+                                        int dd = Integer.parseInt(st.nextToken().toString());
+                                        int mm = Integer.parseInt(st.nextToken().toString());
+                                        int yy = Integer.parseInt(st.nextToken().toString());
+                                        Log.d(TAG, "onResponse: "+dd+" "+mDay+" " +mm+" " +mMonth+" "+yy+" "+mYear+" " + mHour);
 
-                                        // adding hash_list to hash_list list
-                                        menuList.add(hash_list);
-                                        if (c.getString("veg").equalsIgnoreCase("1")) {
-                                            menuVegList.add(hash_list);
+                                        if(yy>mYear){
+                                            flag = true;
+                                        }else{
+                                            if(mm > mMonth){
+                                                flag = true;
+                                            }else{
+                                                if(dd > mDay){
+                                                    flag = true;
+                                                }else{
+                                                    if(dd == mDay){
+                                                        if( mHour < 11){
+                                                            flag = true;
+                                                        }else{
+                                                            if(mHour >=11 && mHour < 18 && time.equals("2")){
+                                                                flag = true;
+                                                            }
+                                                        }
+                                                    }
+
+                                                }
+                                            }
+                                        }
+                                        if(flag){
+                                            // adding hash_list to hash_list list
+                                            menuList.add(hash_list);
+                                            if (c.getString("veg").equalsIgnoreCase("1")) {
+                                                menuVegList.add(hash_list);
+                                            }
                                         }
 
                                         Log.w(TAG, "onResponse: Horaha hashlist");
@@ -355,10 +415,10 @@ public class BrowseMenu extends Activity {
                                 dataAdapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.custom_spinner, categories);
 
                                 // Drop down layout style - list view with radio button
-                                dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-                                // attaching data adapter to spinner
-                                tvAreaDet.setAdapter(dataAdapter);
+//                                dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//
+//                                // attaching data adapter to spinner
+//                                tvAreaDet.setAdapter(dataAdapter);
                             }
                             else{
                                 AlertDialog.Builder alert = new AlertDialog.Builder(getApplicationContext());

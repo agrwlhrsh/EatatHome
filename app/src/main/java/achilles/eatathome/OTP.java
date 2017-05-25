@@ -111,14 +111,14 @@ public class OTP extends Activity {
                             String id = jsonResponse.getString("id");
                             String balance = jsonResponse.getString("balance");
                             if(success) {
-                                Toast.makeText(OTP.this,"REGISTRATION SUCCESSFUL",Toast.LENGTH_LONG ).show();
+//                                Toast.makeText(OTP.this,"REGISTRATION SUCCESSFUL",Toast.LENGTH_LONG ).show();
                                 Intent inten = new Intent(OTP.this, Profile.class);
                                 session.createLoginSession(email, name, phone, address, id, "", "", "",balance,type,aid);
                                 startActivity(inten);
                                 inten.addCategory(Intent.CATEGORY_HOME);
                                 inten.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 startActivity(inten);
-                                Toast.makeText(OTP.this,"REGISTRATION SUCCESSFUL",Toast.LENGTH_LONG ).show();
+//                                Toast.makeText(OTP.this,"REGISTRATION SUCCESSFUL",Toast.LENGTH_LONG ).show();
                                 finish();
                             }
                             else {
@@ -180,7 +180,7 @@ public class OTP extends Activity {
                         inten.addCategory(Intent.CATEGORY_HOME);
                         inten.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(inten);
-                        Toast.makeText(OTP.this,"REGISTRATION SUCCESSFUL",Toast.LENGTH_LONG ).show();
+//                        Toast.makeText(OTP.this,"REGISTRATION SUCCESSFUL",Toast.LENGTH_LONG ).show();
                         finish();
                     }
                     else {

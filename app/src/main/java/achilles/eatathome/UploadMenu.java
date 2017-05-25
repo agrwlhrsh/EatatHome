@@ -38,19 +38,20 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.StringTokenizer;
 
 public class UploadMenu extends AppCompatActivity {
-    private static final String TAG = "Upload Menu";
-    private int mYear,mMonth,mDay;
 
     private static final String EDITMENU_URL = "http://eatathome.pe.hu/EditMenu.php";
     private static final String UPLOADMENU_URL = "http://eatathome.pe.hu/UploadMenu.php";
     private static final String SMENU_URL = "http://eatathome.pe.hu/SMenu_list.php";
-
-    String date = "", menu = "", item = "", quan = "", cost = "", veg = "-1", time = "0";
+    private static final String TAG = "Upload Menu";
+    private int mYear,mMonth,mDay,mHour;
 
     RelativeLayout ic1, ic4;
     SessionManager session;
+
+    String date = "", menu = "", item = "", quan = "", cost = "", veg = "-1", time = "0";
     String name = "";
     String email = "";
     String id = "";
@@ -63,12 +64,10 @@ public class UploadMenu extends AppCompatActivity {
     String address = "";
     String aid = "0";
 
-
     private RecyclerView recyclerView;
     private RecyclerView.Adapter cAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     ArrayList<HashMap<String, String>> sup_menuList;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,6 +107,13 @@ public class UploadMenu extends AppCompatActivity {
                 startActivity(inten);
             }
         });
+
+        final Calendar c = Calendar.getInstance();
+        mYear = c.get(Calendar.YEAR);
+        mMonth = c.get(Calendar.MONTH)+1;
+        mDay = c.get(Calendar.DAY_OF_MONTH);
+        mHour = c.get(Calendar.HOUR_OF_DAY);
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,7 +126,6 @@ public class UploadMenu extends AppCompatActivity {
         recyclerView =(RecyclerView) findViewById(R.id.my_recycler_view);
         showMenuList();
     }
-
     private void showMenuList() {
 
         final ProgressDialog progressDialog = new ProgressDialog(this);
@@ -140,11 +145,7 @@ public class UploadMenu extends AppCompatActivity {
                                 JSONArray order = jsonResponse.getJSONArray("menu");
                                 for (int i = 0; i < order.length(); i++) {
                                     JSONObject c = order.getJSONObject(i);
-
-                                    // tmp hash map for single hash_list
                                     HashMap<String, String> hash_list = new HashMap<>();
-
-                                    // adding each child node to HashMap key => value
                                     hash_list.put("mid", c.getString("mid"));
                                     hash_list.put("time",c.getString("time"));
                                     hash_list.put("date", c.getString("date"));
@@ -153,7 +154,6 @@ public class UploadMenu extends AppCompatActivity {
                                     hash_list.put("mname",c.getString("mname"));
                                     hash_list.put("cost",c.getString("cost"));
                                     hash_list.put("veg", c.getString("veg"));
-                                    // adding hash_list to hash_list list
                                     sup_menuList.add(hash_list);
                                     Log.w(TAG, "onResponse: Horaha hashlist" );
                                 }
@@ -164,16 +164,10 @@ public class UploadMenu extends AppCompatActivity {
                                 cAdapter = new UploadAdapter(sup_menuList,null);
                                 recyclerView.setAdapter(cAdapter);
                                 UploadAdapter.Callback adapterListener = new UploadAdapter.Callback() {
-
                                     @Override
                                     public void onUploadClick(HashMap<String, String> cart) {
                                         editMenu(cart);
                                     }
-
-//                                    @Override
-//                                    public void onDeleteClick(String mid) {
-//                                        deleteMenu(mid);
-//                                    }
                                 };
                                 UploadAdapter.setCallback(adapterListener);
                             }
@@ -216,7 +210,6 @@ public class UploadMenu extends AppCompatActivity {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
     }
-
     private void editMenu(HashMap<String, String> cart) {
         String mName = cart.get("mname");
         String mMid = cart.get("mid");
@@ -229,51 +222,6 @@ public class UploadMenu extends AppCompatActivity {
 
         openEditDialog(mMid, mDate, mTime, mName, mDesc, mQuan,mCost, mVeg);
     }
-
-//    private void deleteMenu(final String mid) {
-//        final ProgressDialog progressDialog = new ProgressDialog(this);
-//        progressDialog.setMessage("Uploading...");
-//        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-//        progressDialog.show();
-//        StringRequest stringRequest = new StringRequest(Request.Method.POST, DELETEMENU_URL,
-//                new Response.Listener<String>() {
-//                    @Override
-//                    public void onResponse(String response) {
-//                        try {
-//                            progressDialog.dismiss();
-//                            JSONObject jsonResponse = new JSONObject(response);
-//                            boolean success = jsonResponse.getBoolean("success");
-//                            if(success) {
-//                                Toast.makeText(UploadMenu.this,"Delete SUCCESSFUL",Toast.LENGTH_LONG ).show();
-//                            }
-//                            else {
-//                                Toast.makeText(UploadMenu.this,"Delete FAILED",Toast.LENGTH_LONG ).show();
-//                            }
-//                        }
-//                        catch (JSONException e) {
-//                            progressDialog.dismiss();
-//                            e.printStackTrace();
-//                        }
-//                    }
-//                },
-//                new Response.ErrorListener() {
-//                    @Override
-//                    public void onErrorResponse(VolleyError error) {
-//                        progressDialog.dismiss();
-//                        Toast.makeText(UploadMenu.this,error.toString(),Toast.LENGTH_LONG ).show();
-//                    }
-//                }){
-//            @Override
-//            protected Map<String, String> getParams() throws AuthFailureError {
-//                Map<String,String> map = new HashMap<String,String>();
-//                map.put("mid", mid);
-//                return map;
-//            }
-//        };
-//        RequestQueue requestQueue = Volley.newRequestQueue(this);
-//        requestQueue.add(stringRequest);
-//    }
-
     private void openDialog(){
         LayoutInflater inflater = LayoutInflater.from(UploadMenu.this);
         View subView = inflater.inflate(R.layout.menu_form, null);
@@ -293,7 +241,8 @@ public class UploadMenu extends AppCompatActivity {
         builder.setView(subView);
         final AlertDialog alertDialog = builder.create();
         builder.show();
-        
+        etDate.setText(mDay+"-"+mMonth+"-"+mYear);
+
         //BUD id 31 resolved.. Cancel was not working so called a new Intent.. Now working fine..
         tvCancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -312,25 +261,57 @@ public class UploadMenu extends AppCompatActivity {
                 item = etItem.getText().toString().trim();
                 cost = etCost.getText().toString().trim();
                 quan = etQuan.getText().toString().trim();
-                if(menu.length()<1 || item.length()<1 || cost.length()<1 || quan.length()<1 || veg.equals("-1") || time.equals("0")){
+                StringTokenizer st = new StringTokenizer(date,"-");
+                int dd = Integer.parseInt(st.nextToken().toString());
+                int mm = Integer.parseInt(st.nextToken().toString());
+                int yy = Integer.parseInt(st.nextToken().toString());
+                boolean flag = false;
+                if(yy>mYear){
+                    flag = true;
+                }else{
+                    if(mm > mMonth){
+                        flag = true;
+                    }else{
+                        if(dd > mDay){
+                            flag = true;
+                        }else{
+                            if( mHour < 12){
+                                flag = true;
+                            }else{
+                                if(mHour >=12 && mHour < 19 && time.equals("2")){
+                                    flag = true;
+                                }
+                            }
+                        }
+                    }
+                }
+                if (flag == false) {
                     android.app.AlertDialog.Builder alert = new android.app.AlertDialog.Builder(UploadMenu.this);
-                    alert.setMessage("Fields Cannot be Empty. Please fill in all details of Menu...");
+                    alert.setMessage("Sorry The time to upload Lunch has passed. Please Select a different time ");
                     alert.setPositiveButton("OK",null);
                     alert.show();
                 }else{
-                    android.app.AlertDialog.Builder alert = new android.app.AlertDialog.Builder(UploadMenu.this);
-                    alert.setMessage("Are you sure you want to Continue??");
-                    alert.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
+                    if(menu.length()<1 || item.length()<1 || cost.length()<1 || quan.length()<1 || veg.equals("-1") || time.equals("0")){
+                        android.app.AlertDialog.Builder alert = new android.app.AlertDialog.Builder(UploadMenu.this);
+                        alert.setMessage("Fields Cannot be Empty. Please fill in all details of Menu...");
+                        alert.setPositiveButton("OK",null);
+                        alert.show();
+                    }else{
+                        android.app.AlertDialog.Builder alert = new android.app.AlertDialog.Builder(UploadMenu.this);
+                        alert.setMessage("Are you sure you want to Continue??");
+                        alert.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
 
-                            alertDialog.dismiss();
-                            uploadMenu();
-                        }
-                    });
-                    alert.setNegativeButton("No", null);
-                    alert.show();
+                                alertDialog.dismiss();
+                                uploadMenu();
+                            }
+                        });
+                        alert.setNegativeButton("No", null);
+                        alert.show();
+                    }
                 }
+
             }
         });
         tvLunch.setOnClickListener(new View.OnClickListener() {
@@ -372,7 +353,6 @@ public class UploadMenu extends AppCompatActivity {
         final Calendar myCalendar = Calendar.getInstance();
 
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
-
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear,
                                   int dayOfMonth) {
@@ -380,22 +360,15 @@ public class UploadMenu extends AppCompatActivity {
                 myCalendar.set(Calendar.YEAR, year);
                 myCalendar.set(Calendar.MONTH, monthOfYear);
                 myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                // myCalendar.add(Calendar.DATE, 0);
-                String myFormat = "dd-MM-yyyy"; //In which you need put here
+                String myFormat = "dd-MM-yyyy";
                 SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.getDefault());
                 etDate.setText(sdf.format(myCalendar.getTime()));
             }
         };
 
         etDate.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
-                final Calendar c = Calendar.getInstance();
-                mYear = c.get(Calendar.YEAR);
-                mMonth = c.get(Calendar.MONTH);
-                mDay = c.get(Calendar.DAY_OF_MONTH);
-
                 DatePickerDialog dpd = new DatePickerDialog(UploadMenu.this,
                         new DatePickerDialog.OnDateSetListener() {
                             @Override
@@ -403,14 +376,13 @@ public class UploadMenu extends AppCompatActivity {
                                                   int monthOfYear, int dayOfMonth) {
                                 etDate.setText(dayOfMonth + "-"+(monthOfYear + 1) + "-" + year);
                             }
-                        }, mYear, mMonth, mDay);
+                        }, mYear, (mMonth-1), mDay);
 
                 dpd.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
                 dpd.show();
             }
         });
     }
-
     private void openEditDialog(final String mMid, final String mDate, final String mTime, final String mName, final String mDesc, final String mQuan, final String mCost, final String mVeg){
         LayoutInflater inflater = LayoutInflater.from(UploadMenu.this);
         View subView = inflater.inflate(R.layout.menu_form, null);
@@ -571,8 +543,6 @@ public class UploadMenu extends AppCompatActivity {
             }
         });
     }
-
-
     private void uploadEditMenu(final String mMid, final String mDate, final String mTime, final String mName, final String mDesc, final String mQuan, final String mCost, final String mVeg) {
         final ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Uploading...");
@@ -628,7 +598,6 @@ public class UploadMenu extends AppCompatActivity {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
     }
-
     private void uploadMenu() {
         final ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Uploading...");
@@ -681,7 +650,6 @@ public class UploadMenu extends AppCompatActivity {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
     }
-
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(Intent.ACTION_MAIN);

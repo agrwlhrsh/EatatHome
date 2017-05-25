@@ -122,7 +122,7 @@ public class Payment extends AppCompatActivity {
         if (requestCode == PayUMoney_Constants.PAYMENT_REQUEST) {
             if (resultCode == RESULT_OK) {
                 //bud id : 37  removed the progress dialog as app was stopping after payment
-                Toast.makeText(this, "PAYMENT SUCCESSFUL", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this, "PAYMENT SUCCESSFUL", Toast.LENGTH_SHORT).show();
                 transtatus = "1";
                 tid = data.getStringExtra("result");
                 generateBill(tid,transtatus);
@@ -139,7 +139,7 @@ public class Payment extends AppCompatActivity {
 
             } else if (resultCode == RESULT_CANCELED) {
                 //bud id : 37  removed the progress dialog as app was stopping after payment
-                Toast.makeText(this, "PAYMENT FAILED", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this, "PAYMENT FAILED", Toast.LENGTH_SHORT).show();
                 transtatus = "0";
                 oid = "0";
                 tid = data.getStringExtra("result");

@@ -2,15 +2,16 @@ package achilles.eatathome;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,7 +36,7 @@ public class CookSignup extends AppCompatActivity {
 
     EditText etAcNumber, etAcName, etIFSC,  etBuildNo, etLandmark;
     TextView tvContinue, tvArea;
-    Spinner spArea;
+    Button spArea;
 
     String name = "";
     String email = "";
@@ -79,34 +80,62 @@ public class CookSignup extends AppCompatActivity {
         etAcName = (EditText)findViewById(R.id.etAcName);
         etIFSC = (EditText)findViewById(R.id.etIFSC);
         etBuildNo = (EditText)findViewById(R.id.etBuildNo);
-        spArea = (Spinner)findViewById(R.id.spArea);
+        spArea = (Button)findViewById(R.id.spArea);
         etLandmark = (EditText)findViewById(R.id.etLandmark);
         tvArea = (TextView)findViewById(R.id.tvArea);
         tvContinue = (TextView)findViewById(R.id.tvContinue);
 
-        spArea.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if(position == 0){
-                    area_select = "";
-                }else {
-                    tvArea.setText(categories.get(position));
-                    area_select = categories.get(position).toString();
 
-                    aid = position;
-                    StringTokenizer st = new StringTokenizer(area_select, ",");
-                    area = st.nextToken().toString() + "";
-                    city = st.nextToken().toString() + "";
-                    state = st.nextToken().toString() + "";
-                    pincode = st.nextToken().toString() + "";
+        spArea.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                    new AlertDialog.Builder(CookSignup.this)
+                            .setTitle("Select Area")
+                            .setAdapter(dataAdapter, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int position) {
+
+                                    // TODO: user specific action
+                                    tvArea.setText(categories.get(position));
+                                    area_select = categories.get(position).toString();
+
+                                    aid = position+1;
+                                    StringTokenizer st = new StringTokenizer(area_select, ",");
+                                    area = st.nextToken().toString() + "";
+                                    city = st.nextToken().toString() + "";
+                                    state = st.nextToken().toString() + "";
+                                    pincode = st.nextToken().toString() + "";
+                                    spArea.setText(area);
+                                    spArea.setTextColor(Color.parseColor("#F9D5D5"));
+                                    dialog.dismiss();
+                                }
+                            }).create().show();
                 }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
         });
+//            @Override
+//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                if(spArea.getSelectedItem() == "Select Location")
+//                {
+//
+//                    //Do nothing.
+//                }else {
+//                    tvArea.setText(categories.get(position));
+//                    area_select = categories.get(position).toString();
+//
+//                    aid = position;
+//                    StringTokenizer st = new StringTokenizer(area_select, ",");
+//                    area = st.nextToken().toString() + "";
+//                    city = st.nextToken().toString() + "";
+//                    state = st.nextToken().toString() + "";
+//                    pincode = st.nextToken().toString() + "";
+//                }
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parent) {
+//
+//            }
+//        });
 
         tvContinue.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -150,8 +179,7 @@ public class CookSignup extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-
-                        Toast.makeText(CookSignup.this,"OTP sent Succesfully",Toast.LENGTH_LONG).show();
+//                        Toast.makeText(CookSignup.this,"OTP sent Succesfully",Toast.LENGTH_LONG).show();
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -185,9 +213,9 @@ public class CookSignup extends AppCompatActivity {
                                     categories.add(c.getString("aname")+", "+c.getString("ctname")
                                             +", "+c.getString("stname")+", "+ c.getString("pincode"));
                                 }
-                                dataAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, categories);
-                                dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                                spArea.setAdapter(dataAdapter);
+                                dataAdapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.custom_spinner, categories);
+//                                dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//                                spArea.setAdapter(dataAdapter);
                             }
                             else{
                                 AlertDialog.Builder alert = new AlertDialog.Builder(getApplicationContext());

@@ -1,7 +1,6 @@
 package achilles.eatathome;
 
 
-import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,9 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.HashMap;
-import java.util.StringTokenizer;
 
 import static com.android.volley.VolleyLog.TAG;
 
@@ -34,7 +31,7 @@ public class UploadAdapter extends RecyclerView.Adapter<UploadAdapter.ViewHolder
             tvDate= (TextView) rowView.findViewById(R.id.tvDate);
             tvCost= (TextView) rowView.findViewById(R.id.tvCost);
             //tvDelete= (TextView) rowView.findViewById(R.id.tvDelete);
-            tvUpload= (TextView) rowView.findViewById(R.id.tvUpload);
+//            tvUpload= (TextView) rowView.findViewById(R.id.tvUpload);
         }
     }
 
@@ -74,54 +71,47 @@ public class UploadAdapter extends RecyclerView.Adapter<UploadAdapter.ViewHolder
         }
         holder.tvDate.setText(date);
         holder.tvCost.setText("\u20B9 " + cost);
-        final Calendar c = Calendar.getInstance();
-        int mYear = c.get(Calendar.YEAR);
-        int mMonth = c.get(Calendar.MONTH);
-        int mDay = c.get(Calendar.DAY_OF_MONTH);
-        StringTokenizer st = new StringTokenizer(date,"-");
-        int dd = Integer.parseInt(st.nextToken().toString());
-        int mm = Integer.parseInt(st.nextToken().toString());
-        int yy = Integer.parseInt(st.nextToken().toString());
-        Log.w(TAG, "onBindViewHolder: " + dd + ":" + mDay + "|"+mm + ":" + mMonth +"|"+yy + ":" + mYear);
-        if(mYear > yy){
-            flag = true;
-        }else{
-            if(mMonth>mm){
-                flag = true;
-            }else{
-                if(mDay>dd){
-                    flag = true;
-                }
-            }
-        }
-        if(flag) {
-            holder.tvUpload.setOnClickListener(new View.OnClickListener() {
-
-                @Override
-                public void onClick(View v) {
-                    HashMap<String, String> cart = new HashMap<String, String>();
-                    cart.put("mid", mid);
-                    cart.put("mname", mname);
-                    cart.put("items", items);
-                    cart.put("date", date);
-                    cart.put("cost", cost);
-                    cart.put("veg", veg);
-                    cart.put("time", time + "");
-                    cart.put("quan", quan);
-                    callback.onUploadClick(cart);
-
-                }
-            });
-        }else{
-            holder.tvUpload.setTextColor(Color.parseColor("#EEEEEE"));
-        }
-//        holder.tvDelete.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                callback.onDeleteClick(mid);
+//        final Calendar c = Calendar.getInstance();
+//        int mYear = c.get(Calendar.YEAR);
+//        int mMonth = c.get(Calendar.MONTH);
+//        int mDay = c.get(Calendar.DAY_OF_MONTH);
+//        StringTokenizer st = new StringTokenizer(date,"-");
+//        int dd = Integer.parseInt(st.nextToken().toString());
+//        int mm = Integer.parseInt(st.nextToken().toString());
+//        int yy = Integer.parseInt(st.nextToken().toString());
+//        Log.w(TAG, "onBindViewHolder: " + dd + ":" + mDay + "|"+mm + ":" + mMonth +"|"+yy + ":" + mYear);
+//        if(mYear > yy){
+//            flag = true;
+//        }else{
+//            if(mMonth>mm){
+//                flag = true;
+//            }else{
+//                if(mDay>dd){
+//                    flag = true;
+//                }
 //            }
-//        });
+//        }
+//        if(flag) {
+//            holder.tvUpload.setOnClickListener(new View.OnClickListener() {
+//
+//                @Override
+//                public void onClick(View v) {
+//                    HashMap<String, String> cart = new HashMap<String, String>();
+//                    cart.put("mid", mid);
+//                    cart.put("mname", mname);
+//                    cart.put("items", items);
+//                    cart.put("date", date);
+//                    cart.put("cost", cost);
+//                    cart.put("veg", veg);
+//                    cart.put("time", time + "");
+//                    cart.put("quan", quan);
+//                    callback.onUploadClick(cart);
+//
+//                }
+//            });
+//        }else{
+//            holder.tvUpload.setTextColor(Color.parseColor("#EEEEEE"));
+//        }
     }
 
     public static void setCallback(UploadAdapter.Callback callback1){
